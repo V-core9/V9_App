@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Dev Build Function
+dev_build() {
+  echo "Building dev version"
+  cp .env-dev .env -f
+}
+
+# Live / Production Build Function
+live_build() {
+  echo "Building live version"
+  cp .env-live .env -f
+}
+
+# Check if the argument is
+# - 0 length -> Live Build
+# - "dev" -> Development Buid
+if [[ "$#" -eq "0" ]]; then
+  live_build
+else
+  if [ "$1" = "dev" ]; then
+    dev_build
+  else
+    live_build
+  fi
+fi
+
+docker-compose up -d

@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: ${PROJECT_NAME}_nginx
+    image: nginx:stable
+    restart: unless-stopped
+    depends_on:
+      - api
+      - app
+      - mysql
+    networks:
+      - internal
+    volumes:
+      - ./nginx/image-files/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+
+  app:
+    container_name: ${PROJECT_NAME}_app
+    image: ${APP_NODE_IMAGE}
+    restart: unless-stopped
+    command: sh -c "npm install && npm run start"
+    ports:
+      - ${APP_PORT}:${APP_DOCKER_PORT}
+    working_dir: /app
+    volumes:
+      - ./app/:/app
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${APP_DOCKER_PORT}
+      API_URL: ${API_URL}
+    depends_on:
+      - mysql
+    mem_limit: 1024m
+    mem_reservation: 128M
+    cpus: ${APP_CPUS}
+    networks:
+      - internal
+
+  api:
+    container_name: ${PROJECT_NAME}_api
+    image: ${API_NODE_IMAGE}
+    restart: unless-stopped
+    command: sh -c "npm install && npm run start"
+    ports:
+      - ${API_PORT}:${API_DOCKER_PORT}
+    working_dir: /api
+    volumes:
+      - ./api/:/api
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${API_DOCKER_PORT}
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${PROJECT_NAME}_mysql:${MYSQL_PORT}/${MYSQL_DATABASE}
+      CORE_COUNT: ${API_CPUS}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+    depends_on:
+      - mysql
+    mem_limit: 2048m
+    mem_reservation: 256M
+    cpus: ${API_CPUS}
+    networks:
+      - internal
+
+  # MySql Database Container
+  mysql:
+    image: mariadb:${MARIADB_VERSION:-latest}
+    container_name: ${PROJECT_NAME}_mysql
+    restart: unless-stopped
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    mem_limit: 1024m
+    mem_reservation: 256M
+    cpus: ${MYSQL_CPUS}
+    ports:
+      - 8000:${MYSQL_PORT}
+    networks:
+      - internal
+
+  # Old School Admin.
+  phpmyadmin:
+    container_name: ${PROJECT_NAME}_phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    environment:
+      PMA_HOST: ${PROJECT_NAME}_mysql
+      PMA_PORT: ${MYSQL_PORT}
+      PMA_ARBITRARY: 1
+    links:
+      - mysql
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  mysql:
