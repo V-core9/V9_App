@@ -1,8 +1,13 @@
+const { isAuthenticated, isAdmin } = require('../middlewares');
+const { findUserByEmail, createUserByEmailAndPassword, findUserById, listUsers, updateUser } = require('../services/users');
+const { v4: uuidv4 } = require('uuid');
+
 var express = require('express');
 var router = express.Router();
 
+
 /**
- * 
+ *
  * @swagger
  * tags:
  *  name: Users
@@ -51,10 +56,13 @@ var router = express.Router();
  *                   items:
  *                     $ref: '#/components/schemas/User'
 */
-router.get('/', function (req, res, next) {
-  res.send('GETTING LIST OF USERS');
+router.get('/', async (req, res, next) => {
+  try {
+    res.json(await listUsers());
+  } catch (err) {
+    next(err);
+  }
 });
-
 
 /**
  * @swagger
@@ -83,8 +91,12 @@ router.get('/', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/User'
 */
-router.get('/:id', function (req, res, next) {
-  res.send('I WILL GET USER BY ID:' + req.params.id);
+router.get('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
+  try {
+    res.json(await findUserById(req.params.id));
+  } catch (err) {
+    next(err);
+  }
 });
 
 /**
@@ -107,9 +119,34 @@ router.get('/:id', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/User'
 */
-router.post('/', function (req, res, next) {
-  res.send('I WILL CREATE NEW USER');
+router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400);
+      throw new Error('You must provide an email and a password.');
+    }
+
+    const existingUser = await findUserByEmail(email);
+
+    if (existingUser) {
+      res.status(400);
+      throw new Error('Email already in use.');
+    }
+
+    const username = req.body.username || uuidv4();
+
+    const user = await createUserByEmailAndPassword({ email, password, username });
+
+    res.json({
+      id: user.id,
+      username: user.username,
+    });
+  } catch (err) {
+    next(err);
+  }
 });
+
 /**
  * @swagger
  * /users:
@@ -130,8 +167,13 @@ router.post('/', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/User'
 */
-router.put('/', function (req, res, next) {
-  res.send('I WILL UPDATE USER');
+
+router.put('/', isAuthenticated, isAdmin, async (req, res, next) => {
+  try {
+    res.json(await updateUser(req.body));
+  } catch (err) {
+    next(err);
+  }
 });
 
 /**
@@ -154,10 +196,9 @@ router.put('/', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/User'
 */
-router.delete('/', function (req, res, next) {
+router.delete('/', async (req, res, next) => {
   res.send('I WILL DELETE USER');
 });
-
 
 
 module.exports = router;
