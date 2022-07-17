@@ -1,5 +1,5 @@
-const { createUserByEmailAndPassword } = require('../src/api/users/users.services');
-const { createFunc } = require('../src/api/functions/functions.services');
+const { createUserByEmailAndPassword } = require('../services/users');
+const { createFunc } = require('../services/functions');
 
 const log = (...args) => console.log(...args);
 
