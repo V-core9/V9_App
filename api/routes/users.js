@@ -1,5 +1,6 @@
 const { isAuthenticated, isAdmin } = require('../middlewares');
-const { findUserById, listUsers, updateUser } = require('../services/users');
+const { findUserByEmail, createUserByEmailAndPassword, findUserById, listUsers, updateUser } = require('../services/users');
+const { v4: uuidv4 } = require('uuid');
 
 var express = require('express');
 var router = express.Router();
@@ -118,8 +119,32 @@ router.get('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
  *                   items:
  *                     $ref: '#/components/schemas/User'
 */
-router.post('/', async (req, res, next) => {
-  res.send('I WILL CREATE NEW USER');
+router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400);
+      throw new Error('You must provide an email and a password.');
+    }
+
+    const existingUser = await findUserByEmail(email);
+
+    if (existingUser) {
+      res.status(400);
+      throw new Error('Email already in use.');
+    }
+
+    const username = req.body.username || uuidv4();
+
+    const user = await createUserByEmailAndPassword({ email, password, username });
+
+    res.json({
+      id: user.id,
+      username: user.username,
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 /**

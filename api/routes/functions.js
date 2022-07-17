@@ -13,7 +13,6 @@ const {
 
 const router = express.Router();
 
-
 /**
  *
  * @swagger
@@ -32,18 +31,21 @@ const router = express.Router();
  *         name:
  *           type: string
  *           description: The user's name.
- *           example: Leanne Graham
+ *           example: demo-function-name
+ *         content:
+ *           type: string
+ *           description: The actual code you want to run.
+ *           example: return 1;
  *     Function:
  *       allOf:
  *         - type: object
  *           properties:
  *             id:
- *               type: integer
+ *               type: string
  *               description: The user ID.
- *               example: 0
+ *               example: 0cf9c3c8-8fee-4ada-aff9-bd978f9cd5dd
  *         - $ref: '#/components/schemas/NewFunction'
  */
-
 
 /**
  * @swagger
@@ -66,7 +68,7 @@ const router = express.Router();
  *                     $ref: '#/components/schemas/Function'
 */
 
-router.get('/', isAuthenticated, isAdmin, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     res.json(await listFunctions());
   } catch (err) {
@@ -101,7 +103,7 @@ router.get('/', isAuthenticated, isAdmin, async (req, res, next) => {
  *                   items:
  *                     $ref: '#/components/schemas/Function'
 */
-router.get('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     res.json(await findById(req.params.id));
   } catch (err) {
@@ -133,7 +135,7 @@ router.get('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
  *               $ref: '#/components/schemas/Function'
 */
 
-router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     req.body.authorId = req.payload.userId;
     req.body.name = req.body.name.replaceAll(' ', '-');
@@ -171,14 +173,13 @@ router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
  *                     $ref: '#/components/schemas/Function'
 */
 // GET Function By Name
-router.get('/byName/:name', isAuthenticated, isAdmin, async (req, res, next) => {
+router.get('/byName/:name', async (req, res, next) => {
   try {
     res.json(await findByName(req.params.name));
   } catch (err) {
     next(err);
   }
 });
-
 
 /**
  * @swagger
@@ -204,7 +205,7 @@ router.get('/byName/:name', isAuthenticated, isAdmin, async (req, res, next) => 
  *               $ref: '#/components/schemas/Function'
 */
 // PUT / Update a function
-router.put('/', isAuthenticated, isAdmin, async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     res.json(await updateFunction(req.body));
   } catch (err) {
@@ -235,7 +236,7 @@ router.put('/', isAuthenticated, isAdmin, async (req, res, next) => {
  *               $ref: '#/components/schemas/Function'
 */
 // PUT / Update a function
-router.put('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     res.json(await updateFunction({ id: req.params.id, ...req.body }));
   } catch (err) {
@@ -289,15 +290,14 @@ router.put('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
  *               type: object
  *               $ref: '#/components/schemas/Function'
 */
-// DELETE / Remove a function
-router.delete('/:id?', isAuthenticated, isAdmin, async (req, res, next) => {
+
+router.delete('/:id?', async (req, res, next) => {
   try {
     res.json(await deleteFunction((req.params.id === undefined) ? req.body.id : req.params.id));
   } catch (err) {
     next(err);
   }
 });
-
 
 /**
  * @swagger
@@ -323,7 +323,7 @@ router.delete('/:id?', isAuthenticated, isAdmin, async (req, res, next) => {
  *               $ref: '#/components/schemas/Function'
 */
 // RUN Function
-router.post('/run', isAuthenticated, isAdmin, async (req, res, next) => {
+router.post('/run', async (req, res, next) => {
   try {
     if (!req.body.id) {
       res.json(await runByName({ name: req.body.name, args: req.body.args }));
@@ -359,14 +359,13 @@ router.post('/run', isAuthenticated, isAdmin, async (req, res, next) => {
  *               $ref: '#/components/schemas/Function'
 */
 // RUN Function byId
-router.post('/run/byId/:id', isAuthenticated, isAdmin, async (req, res, next) => {
+router.post('/run/byId/:id', async (req, res, next) => {
   try {
     res.json(await runById({ id: req.params.id, args: req.body }));
   } catch (err) {
     next(err);
   }
 });
-
 
 /**
  * @swagger
