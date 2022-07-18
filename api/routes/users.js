@@ -1,10 +1,14 @@
-const { isAuthenticated, isAdmin } = require('../middlewares');
-const { findUserByEmail, createUserByEmailAndPassword, findUserById, listUsers, updateUser } = require('../services/users');
 const { v4: uuidv4 } = require('uuid');
+const router = require('express').Router();
 
-var express = require('express');
-var router = express.Router();
-
+const { isAuthenticated, isAdmin } = require('../middlewares');
+const {
+  findUserByEmail,
+  createUserByEmailAndPassword,
+  findUserById,
+  listUsers,
+  updateUser
+} = require('../services/users');
 
 /**
  *
@@ -41,7 +45,7 @@ var router = express.Router();
  * /users:
  *   get:
  *     summary: Retrieve a list of users.
- *     description: Retrieve a list of users. Can be used to populate a list of fake users when prototyping or testing an API.
+ *     description: Retrieve a list of users.
  *     tags: [Users]
  *     responses:
  *       200:
@@ -196,9 +200,9 @@ router.put('/', isAuthenticated, isAdmin, async (req, res, next) => {
  *                   items:
  *                     $ref: '#/components/schemas/User'
 */
+
 router.delete('/', async (req, res, next) => {
   res.send('I WILL DELETE USER');
 });
-
 
 module.exports = router;
