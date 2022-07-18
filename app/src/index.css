@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root,
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: stretch;
+  justify-content: space-between;
+  background: #1a242c;
+}
+
+.app-container>.container.pt-4.pb-4 {
+  flex: 1;
+  color: white;
+}
+
+nav,
+footer {
+  background: #151c22;
+}
+
+a.nav-item.nav-link.active {
+  color: white;
+}
+
+.card {
+  background-color: #263540;
+  box-shadow: 0 20px 40px -20px black;
+}
+
+.myBooks nav>.navbar-nav {
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.myBooks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.modal {
+  display: block;
+  z-index: 100;
+  background: #1e2730e0;
+}
+
+.modal .modal-content {
+  background: #151c22;
+  background-color: #151c22;
+  box-shadow: 0 20px 50px -20px black;
+  border: 2px solid #1a242c;
+}
+
+.modal .modal-content .modal-header {
+  border-bottom: 1px solid #1a242c;
+}
+
+.modal .modal-content .modal-footer {
+  border-top: 1px solid #1a242c;
+}
+
+ul>li.list-group-item {
+  background: #0000000f;
+  color: #607d8b;
+}
+
+ul>li.list-group-item h5 {
+  color: white;
+}
+
+ul>li.list-group-item:hover {
+  background: #ffffff0f;
+}
+
+.app-container button {
+  border: 3px solid #151c2296;
+}
+
+
+
+.books .row>div>.card {
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.books .row>div>.card img {
+  max-width: 96px;
+  height: 100%;
+  align-self: center;
+  background: #1a242c;
+  margin: .5rem;
+}
+
+.books .row>div>.card>.card-body {
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+.adminUsers .card {
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.adminUsers .card img {
+  max-width: 96px;
+  height: 100%;
+  align-self: center;
+  background: #1a242c;
+  margin: .5rem;
+}
+
+.adminUsers div>.card>.card-body {
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+
+.adminUsers ul>li.list-group-item {
+  padding: 0;
+}
+
+
+div#navbarScroll>* {
+  flex: 1;
+}
+
+
+.modal-content>.card {
+  flex-direction: column;
+}
