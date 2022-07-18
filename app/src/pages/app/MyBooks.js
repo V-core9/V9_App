@@ -10,8 +10,9 @@ export { MyBooks };
 function MyBooks() {
     const dispatch = useDispatch();
     const user = useSelector(x => x.auth.user);
-    const { myBooks } = useSelector(x => x.myBooks);
+    const myBooks = useSelector(x => x.myBooks);
 
+    console.log(myBooks);
 
     useEffect(() => {
         dispatch(myBooksActions.getMyBooks());
@@ -29,13 +30,11 @@ function MyBooks() {
                     </div>
                 </div>
             </nav>
-            {myBooks.length &&
-                <ul className="list-group">
-                    {myBooks.map(book =>
-                        <BooksListItem book={book} />
-                    )}
-                </ul>
-            }
+            <ul className="list-group">
+                {myBooks.myBooks?.map(book =>
+                    <BooksListItem book={book} />
+                )}
+            </ul>
             {myBooks.loading && <div className="spinner-border spinner-border-sm"></div>}
             {myBooks.error && <div className="text-danger">Error loading MyBooks: {myBooks.error.message}</div>}
             <BookNewModal />

@@ -39,7 +39,9 @@ function createInitialState() {
     return {
         myBooks: [],
         newModalShow: false,
-        editing: null
+        editing: null,
+        loading: false,
+        error: null
     }
 }
 
@@ -94,13 +96,14 @@ function createExtraReducers() {
         var { pending, fulfilled, rejected } = extraActions.getMyBooks;
         return {
             [pending]: (state) => {
-                state.myBooks = { loading: true };
+                state.loading = true;
             },
             [fulfilled]: (state, action) => {
+                console.log('getMyBooks.payload', action.payload);
                 state.myBooks = action.payload;
             },
             [rejected]: (state, action) => {
-                state.myBooks = { error: action.error };
+                state.error = action.error;
             }
         };
     }

@@ -56,6 +56,37 @@ const {
  *           example: nd2asi3dnp3sad2pon4a5pso4n2d
  */
 
+//* Get My Books
+/**
+ * @swagger
+ * /books/me:
+ *   get:
+ *     summary: List of owned books.
+ *     description: List of books owned by the authorized user.
+ *     tags: [Books]
+ *     responses:
+ *       200:
+ *         description: List of your books.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Book'
+*/
+router.get('/me', isAuthenticated, async (req, res, next) => {
+  try {
+    const data = await listByAuthorId(req.payload.userId);
+    res.json(data !== null ? data : {});
+  } catch (err) {
+    next(err);
+  }
+});
+//! Get My Books
+
 //* Get List of Books
 /**
  * @swagger
@@ -189,20 +220,6 @@ router.post('/', isAuthenticated, async (req, res, next) => {
  *                   items:
  *                     $ref: '#/components/schemas/Book'
 */
-router.put('/', isAuthenticated, async (req, res, next) => {
-  try {
-    const book = await findBookById(req.body.id);
-    if (book.authorId === req.payload.userId) {
-      res.json(await updateBook(req.body));
-    } else {
-      res.status(403).json({
-        message: 'You are not authorized to update this book',
-      });
-    }
-  } catch (err) {
-    next(err);
-  }
-});
 //! Update using Request Body Data
 
 //* Update using the request params Id
@@ -240,9 +257,10 @@ router.put('/', isAuthenticated, async (req, res, next) => {
  *                   items:
  *                     $ref: '#/components/schemas/Book'
 */
-router.put('/:id', isAuthenticated, async (req, res, next) => {
+router.put('/:id?', isAuthenticated, async (req, res, next) => {
   try {
-    const book = await findBookById(req.params.id);
+    req.body.id = (req.params.id !== undefined) ? req.params.id : req.body.id;
+    const book = await findBookById(req.body.id);
     if (book.authorId === req.payload.userId) {
       res.json(await updateBook(req.body));
     } else {
@@ -340,34 +358,5 @@ router.delete('/:id', isAuthenticated, async (req, res, next) => {
 });
 //! Delete using the request params ID.
 
-//* Get My Books
-/**
- * @swagger
- * /books/me:
- *   get:
- *     summary: List of owned books.
- *     description: List of books owned by the authorized user.
- *     tags: [Books]
- *     responses:
- *       200:
- *         description: List of your books.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Book'
-*/
-router.get('/me', isAuthenticated, async (req, res, next) => {
-  try {
-    res.json(await listByAuthorId(req.payload.userId));
-  } catch (err) {
-    next(err);
-  }
-});
-//! Get My Books
 
 module.exports = router;

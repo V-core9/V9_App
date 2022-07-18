@@ -4,7 +4,11 @@ import { history } from './helpers';
 import { Nav, Footer, PrivateRoute, PrivateRouteAdmin } from './components';
 import { Home, Login, MyBooks, Register, Books, Users, Functions } from './pages';
 
+import SearchPage from './pages/SearchPage';
+import AssetViewPage from './pages/AssetViewPage';
 
+
+import NavBar from './components/NavBar';
 
 function App() {
   // init custom history object to allow navigation from 
@@ -14,6 +18,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <NavBar />
       <Nav />
       <div className="container pt-4 pb-4">
         <Routes>
@@ -55,6 +60,10 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/asset/:nasa_id" element={<AssetViewPage />} />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

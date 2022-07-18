@@ -7,6 +7,8 @@ import books from './books.slice';
 import myBooks from './myBooks.slice';
 import appFunctions from './appFunctions.slice';
 
+import nasaAssetsReducer from './nasaAssetsSlice';
+
 export * from './auth.slice';
 export * from './authNew.slice';
 export * from './users.slice';
@@ -23,5 +25,6 @@ export const store = configureStore({
     books,
     myBooks,
     appFunctions,
+    nasaAssets: nasaAssetsReducer
   },
 });
