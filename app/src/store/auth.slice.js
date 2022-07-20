@@ -39,7 +39,7 @@ function createReducers() {
   function logout(state) {
     state.user = null;
     localStorage.removeItem('user');
-    window.location.reload();
+    //window.location.reload();
   }
 }
 

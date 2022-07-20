@@ -30,6 +30,8 @@ services:
       NODE_ENV: ${NODE_ENV}
       PORT: ${APP_DOCKER_PORT}
       API_URL: ${API_URL}
+      WATCHPACK_POLLING: 'true'
+      WDS_SOCKET_PORT: ${APP_PORT}
     depends_on:
       - mysql
     mem_limit: 2048m

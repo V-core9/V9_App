@@ -4,9 +4,11 @@ import { fetchWrapper } from '../helpers';
 
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem('user')),
+  user: JSON.parse(localStorage.getItem('user')) || null,
+  loading: null,
   error: null
 };
+
 
 
 
@@ -15,6 +17,9 @@ export const authNewSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
+    logout: (state) => {
+      state.user = null;
+    }
 
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,

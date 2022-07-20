@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 function SearchListItem(props) {
     const { data, links } = props.data;
     return (
-        <NavLink to={"/asset/" + data[0].nasa_id} >
+        <NavLink to={"/nasa-asset/" + data[0].nasa_id} >
             {data[0].media_type === 'image' && <thumbnail style={{ backgroundImage: `url("` + links[0].href + `")` }}></thumbnail>}
             {data[0].media_type === 'audio' && <thumbnail className="audioMediaIcon">▶</thumbnail>}
             {data[0].media_type === 'video' && <thumbnail className="audioMediaIcon" style={{ backgroundImage: `url("` + links[0].href + `")` }}>▶</thumbnail>}

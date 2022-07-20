@@ -40,7 +40,7 @@ function createInitialState() {
         myBooks: [],
         newModalShow: false,
         editing: null,
-        loading: false,
+        loading: null,
         error: null
     }
 }
@@ -101,6 +101,7 @@ function createExtraReducers() {
             [fulfilled]: (state, action) => {
                 console.log('getMyBooks.payload', action.payload);
                 state.myBooks = action.payload;
+                state.loading = null;
             },
             [rejected]: (state, action) => {
                 state.error = action.error;
