@@ -1,6 +1,11 @@
+const notFound = require('./notFound');
+const errorHandler = require('./errorHandler');
+const isAuthenticated = require('./isAuthenticated');
+const isAdmin = require('./isAdmin');
+
 module.exports = {
-  notFound: require('./notFound'),
-  errorHandler: require('./errorHandler'),
-  isAuthenticated: require('./isAuthenticated'),
-  isAdmin: require('./isAdmin'),
+  notFound,
+  errorHandler,
+  isAuthenticated,
+  isAdmin,
 };

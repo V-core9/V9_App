@@ -1,0 +1,452 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background: #263238;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+button {
+  border: none;
+  background: #607d8b;
+  color: white;
+  padding: 0.5em 1em;
+  border: 3px solid transparent;
+}
+
+button:hover {
+  background: #3c525c;
+  cursor: pointer;
+  border: 3px solid #00000085;
+  box-shadow: 0 0 10px slategrey;
+  transition: all .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+nasa_image_listing {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+}
+
+
+
+
+
+single_post_view {
+  display: flex;
+  flex-direction: column;
+}
+
+single_post_view>* {
+  flex: 1;
+  padding: 1em;
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+single_post_view>gallery img {
+  max-width: 100%;
+}
+
+single_post_view gallery {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+single_post_view keywords {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+single_post_view keywords p {
+  background: #0432b4;
+  padding: 0.5em 1em;
+  color: white;
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form>section {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+form form_group {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  flex: 1;
+}
+
+div#root {
+  background: #263238;
+  color: white;
+}
+
+
+nav {
+  background: #0000005e;
+  padding: 0.5em;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+}
+
+/*#root>div {
+    max-width: 1280px;
+    margin: 0 auto;
+}*/
+
+
+nasa_image_listing>a {
+  display: flex;
+  width: calc(20% - 1em);
+  min-width: 225px;
+  height: 250px;
+  text-decoration: none;
+  font-size: .5em;
+}
+
+
+nasa_image_thumbnail {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-items: flex-end;
+}
+
+nasa_image_listing>a nasa_image_thumbnail:hover:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background: #2632389e;
+}
+
+nasa_image_thumbnail h2 {
+  display: flex;
+  padding: .5em;
+  color: white;
+  background: #263238ab;
+  margin: 0;
+  z-index: 20;
+  flex: 1;
+}
+
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+  padding: 0.5em;
+}
+
+footer>info,
+footer>pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+
+
+
+
+searchlist {
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  border: 0.25em solid #00000014;
+}
+
+
+results {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+thumbnail {
+  min-width: 125px;
+  min-height: 125px;
+  height: auto;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+
+results>a {
+  display: flex;
+  gap: 1em;
+  border: 1px solid #00000040;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  padding: .5em;
+  border-radius: 10px;
+}
+
+
+
+pagination {
+  display: flex;
+  margin: 0;
+  padding: 0 1em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+pagination>info {
+  margin: 0;
+}
+
+pagination>options {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+
+results>a>thumbnail,
+results>a>info {
+  z-index: 100;
+  overflow: hidden;
+}
+
+results>a:before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  background: #2632389e;
+  transition: all 0.5s ease;
+  border-radius: 10px;
+}
+
+results>a:hover:before {
+  width: 100%;
+  height: 100%;
+  background: #153e539e;
+}
+
+
+single_post_view>article {
+  display: flex;
+  flex-direction: row;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+single_post_view>nav {
+  align-items: flex-start;
+}
+
+
+thumbnail.audioMediaIcon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 75px;
+  background: #ffffff0d;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+div#root {
+  height: fit-content;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+searchlist {
+  flex: 1;
+  height: fit-content;
+  overflow: hidden;
+}
+
+searchlist results {
+  overflow: auto;
+  height: fit-content;
+  display: flex;
+}
+
+
+button.hidden {
+  opacity: 0;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+action {
+  cursor: pointer;
+  padding: 0.25em;
+  border: 1px solid black;
+  background: #0078d7;
+  white-space: nowrap;
+}
+
+label {
+  margin-right: 1em;
+  display: flex;
+  align-items: center;
+}
+
+heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+action.inputReset {
+  background: white;
+  border: none;
+  opacity: 1;
+  color: red;
+}
+
+action.hidden.inputReset {
+  color: transparent;
+}
+
+form_group input {
+  border: none;
+}
+
+form form_group label,
+form form_group input {
+  flex: 1;
+}
+
+
+searchlist {
+  border: 5px solid #1d262a;
+}
+
+filter,
+pagination {
+  background: #1d262a;
+}
+
+action.greenAction {
+  background: green;
+}
+
+
+single_asset {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  overflow: hidden;
+}
+
+
+video {
+  width: 100%;
+}
+
+article {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  flex-direction: column;
+  overflow: auto;
+}
+
+@media screen and (min-width: 768px) {
+  article {
+    flex-direction: row;
+  }
+}
+
+article>gallery,
+article>info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+keywords {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+keywords p {
+  background: #3f51b5;
+  padding: 0.5em 1em;
+  margin: 0;
+}
+
+section h2 {
+  margin: 0;
+  margin-bottom: .85em;
+}
+
+article>info {
+  gap: 1em;
+}
+
+article>info section {
+  background: #00000040;
+  padding: 1em;
+}
+
+
+img {
+  width: 100%;
+}

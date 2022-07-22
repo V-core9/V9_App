@@ -30,9 +30,11 @@ services:
       NODE_ENV: ${NODE_ENV}
       PORT: ${APP_DOCKER_PORT}
       API_URL: ${API_URL}
+      WATCHPACK_POLLING: 'true'
+      WDS_SOCKET_PORT: ${APP_PORT}
     depends_on:
       - mysql
-    mem_limit: 1024m
+    mem_limit: 2048m
     mem_reservation: 128M
     cpus: ${APP_CPUS}
     networks:
@@ -42,7 +44,7 @@ services:
     container_name: ${PROJECT_NAME}_api
     image: ${API_NODE_IMAGE}
     restart: unless-stopped
-    command: sh -c "npm install && npm run start"
+    command: ${API_START_COMMAND}
     ports:
       - ${API_PORT}:${API_DOCKER_PORT}
     working_dir: /api
