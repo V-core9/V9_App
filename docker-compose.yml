@@ -44,7 +44,7 @@ services:
     container_name: ${PROJECT_NAME}_api
     image: ${API_NODE_IMAGE}
     restart: unless-stopped
-    command: sh -c "npm install && npm run start"
+    command: ${API_START_COMMAND}
     ports:
       - ${API_PORT}:${API_DOCKER_PORT}
     working_dir: /api
