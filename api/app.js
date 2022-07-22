@@ -41,7 +41,10 @@ app.use('/users', usersRouter);
 app.use('/books', booksRouter);
 app.use('/bookmarks', bookmarksRouter);
 app.use('/functions', functionsRouter);
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+const isDev = (process.env.NODE_ENV === 'development');
+
+if (isDev) app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(notFound);
 app.use(errorHandler);
