@@ -59,7 +59,7 @@ function AssetViewPage() {
   }
 
   return (
-    <single_asset>
+    <div className="content">
 
       <nav>
         <button onClick={(e) => window.history.back()}>Back</button>
@@ -105,7 +105,7 @@ function AssetViewPage() {
           <small>Post ID: {nasa_id}</small>
         </info>
       </article>
-    </single_asset>
+    </div>
   );
 };
 

@@ -2,9 +2,9 @@
 export { Dashboard };
 
 function Dashboard() {
-    return (
-        <div>
-            FUTURE DASHBOARD PAGE
-        </div>
-    )
+  return (
+    <div className="content">
+      FUTURE DASHBOARD PAGE
+    </div>
+  )
 }

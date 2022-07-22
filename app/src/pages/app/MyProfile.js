@@ -3,7 +3,7 @@ export { MyProfile };
 
 function MyProfile() {
   return (
-    <div>
+    <div className="content">
       🏠 MyProfile Page Example
     </div>
   );

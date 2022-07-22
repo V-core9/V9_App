@@ -1,14 +1,17 @@
 import { Routes, Route, Navigate, useNavigate, useLocation, BrowserRouter as Router } from 'react-router-dom';
 
 import { history } from './helpers';
-import { Nav, Footer, PrivateRoute, PrivateRouteAdmin } from './components';
+import { Nav, Header, Footer, PrivateRoute, PrivateRouteAdmin } from './components';
 import { Home, Login, MyBooks, Register, Books, Users, Functions, Dashboard, ReduxCounter, SearchPage, AssetViewPage, MyProfile } from './pages';
 
 function App() {
   return (
     <Router>
-      <Nav />
-      <AppRoutes />
+      <Header />
+      <div className="main_content">
+        <Nav />
+        <AppRoutes />
+      </div>
       <Footer />
     </Router>
   )

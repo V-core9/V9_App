@@ -1,6 +1,7 @@
 // PUBLIC
 export * from './Counter';
 export * from './Nav';
+export * from './Header';
 export * from './Footer';
 
 export * from './FormLogin';

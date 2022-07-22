@@ -2,18 +2,20 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { NavItem } from './NavItem';
+
 import './nav.scss';
 
-import { authActions } from '../../store';
+import { authActions, applicationActions } from '../../store';
 
 
 export { Nav };
 
 function Nav() {
+  const { nav } = useSelector(x => x.application);
   const authUser = useSelector(x => x.auth.user);
   const dispatch = useDispatch();
 
-  const [isOpen, setIsOpen] = useState(false);
   const [isPC, setIsPC] = useState(window.innerWidth >= 768);
 
   const isAdmin = (!authUser) ? false : (authUser.isAdmin) ? authUser.isAdmin : false;
@@ -23,46 +25,35 @@ function Nav() {
   });
 
   return (
-    <nav>
-      <header>
-        <button onClick={() => setIsOpen(!isOpen)}>{isOpen === true ? '❌' : '🔽'}</button>
-        <NavLink to='/' >
-          🏠 DemoLogo
-        </NavLink>
-      </header>
-      <section className={[`${(isOpen) ? 'shown' : ''} ${(isPC) ? 'isPC' : ''}`]}>
-        {!isPC && <div className="overlay" onClick={() => setIsOpen(!isOpen)}></div>}
-        <div>
-          <header>
-            <h5>Navigation</h5>
-            <button onClick={() => setIsOpen(!isOpen)}>{isOpen === true ? '❌' : '🔽'}</button>
-          </header>
-          <div>
-            <h2>Public</h2>
-            <NavLink to='/'>🏠 Home</NavLink>
-            <NavLink to='/redux-counter'>🔄 Redux Counter</NavLink>
-            <NavLink to='/nasa-search'>🔎 NASA Assets</NavLink>
-          </div>
-          {(!!authUser) && <div>
-            <h2>Application</h2>
-            <NavLink to="/books">📚 Books</NavLink>
-            <NavLink to="/my-books">📑 My Books</NavLink>
-          </div>}
-          {(isAdmin) && <div>
-            <h2>Administration</h2>
-            <NavLink to="/dashboard">👨‍💻 Dashboard</NavLink>
-            <NavLink to="/users">👥 Users</NavLink>
-            <NavLink to="/functions">➰ Functions</NavLink>
-          </div>}
-          <div>
-            <h2>Account</h2>
-            {(!authUser) && <NavLink to="/login">🚏 Login</NavLink>}
-            {(!authUser) && <NavLink to="/register">🚀 Register</NavLink>}
-            {(!!authUser) && <NavLink to="/my-profile">👥 My Profile</NavLink>}
-            {(!!authUser) && <NavLink to="/my-profile">🔄 Settings</NavLink>}
-            {(!!authUser) && <button onClick={() => dispatch(authActions.logout())}>🔻 Logout</button>}
-          </div>
-        </div>
+    <nav className={[`${(nav.isOpen) ? 'shown' : ''} ${(isPC) ? 'isPC' : ''}`]}>
+      {!isPC && <div className="overlay" onClick={() => dispatch(applicationActions.setIsOpen(!nav.isOpen))}></div>}
+      <section>
+        <h5>Navigation</h5>
+        <button onClick={() => dispatch(applicationActions.setIsOpen(!nav.isOpen))}>{nav.isOpen === true ? '❌' : '🔽'}</button>
+      </section>
+      <section>
+        <h2>Public</h2>
+        <NavItem to="/" text="Home" icon="🏠" />
+        <NavItem to="/redux-counter" text="Redux Counter" icon="🔄" />
+        <NavItem to="/nasa-search" text="NASA Assets" icon="🔎" />
+      </section>
+      {(!!authUser) && <section>
+        <h2>Application</h2>
+        <NavItem to="/books" text="Books" />
+        <NavItem to="/my-books" text="My Books" icon="📑" />
+      </section>}
+      {(isAdmin) && <section>
+        <h2>Administration</h2>
+        <NavItem to="/dashboard" text="Dashboard" />
+        <NavItem to="/users" text="Users" />
+        <NavItem to="/functions" text="Functions" />
+      </section>}
+      <section>
+        <h2>Account</h2>
+        {(!authUser) && <NavItem to="/login" text="Login" icon="🚏" />}
+        {(!authUser) && <NavItem to="/register" text="Register" icon="🚀" />}
+        {(!!authUser) && <NavItem to="/my-profile" text="My Profile" icon="👥" />}
+        {(!!authUser) && <button onClick={() => dispatch(authActions.logout())}>🔻 Logout</button>}
       </section>
     </nav>
   );
