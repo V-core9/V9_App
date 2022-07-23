@@ -21,12 +21,46 @@ button {
   color: white;
   padding: 0.5em 1em;
   border: 3px solid transparent;
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
 }
 
 button:hover {
   background: #3c525c;
   cursor: pointer;
-  border: 3px solid #00000085;
   box-shadow: 0 0 10px slategrey;
   transition: all .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+
+
+/*
+NEEDS SORTING OUT
+*/
+img.App-logo {
+  margin: 10px auto;
+}
+
+nav.isPC {
+  position: unset;
+  width: auto;
+  height: auto;
+}
+
+.main_content {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+nav section {
+  max-width: unset;
+}
+
+.main_content .content {
+  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1em;
 }
