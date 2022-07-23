@@ -63,7 +63,7 @@ function SearchListFiler() {
 
             <form_group>
               <label >Start Year</label>
-              <input type="number" value={search.yearStart} onChange={(e) => dispatch(setYearStart(e.target.value))} />
+              <input type="number" value={search.yearStart !== null ? search.yearStart : ''} onChange={(e) => dispatch(setYearStart(e.target.value))} />
               <action className={`${(search.yearStart !== 1) ? 'visible' : 'hidden'} inputReset`} onClick={(e) => dispatch(resetYearStart())} title="Reset Input Field.">🔄</action>
             </form_group>
 

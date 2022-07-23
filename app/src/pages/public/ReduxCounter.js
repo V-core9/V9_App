@@ -6,7 +6,7 @@ export { ReduxCounter };
 
 function ReduxCounter() {
   return (
-    <div className="content">
+    <div>
       <img src={logo} className="App-logo" alt="logo" />
       <Counter />
     </div>

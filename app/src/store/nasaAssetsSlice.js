@@ -5,8 +5,8 @@ const initialState = {
   status: 'idle',
   search: {
     q: '',
-    yearStart: 1,
-    yearEnd: (new Date()).getFullYear(),
+    yearStart: null,
+    yearEnd: null,
     title: '',
     description: '',
     location: '',
@@ -52,18 +52,20 @@ export const nasaAssetsSlice = createSlice({
       state.search.q = action.payload;
     },
     setYearEnd: (state, action) => {
-      const value = Number(action.payload);
-      if (Number.isInteger(value) && value <= (new Date()).getFullYear() && value >= state.search.yearStart) state.search.yearEnd = value;
+      console.log('setYearEnd', action.payload);
+      const value = (action.payload === '') ? null : Number(action.payload);
+      if ((Number.isInteger(value) && value <= (new Date()).getFullYear() && value > (state.search.yearStart === null ? 0 : state.search.yearStart)) || value === null) state.search.yearEnd = value;
     },
     resetYearEnd: (state) => {
-      state.search.yearEnd = (new Date()).getFullYear();
+      state.search.yearEnd = null;
     },
     setYearStart: (state, action) => {
-      const value = Number(action.payload);
-      if (Number.isInteger(value) && value > 0 && value <= state.search.yearEnd) state.search.yearStart = value;
+      console.log('setYearStart', action.payload);
+      const value = (action.payload === '') ? null : Number(action.payload);
+      if ((Number.isInteger(value) && value > 0 && value <= (state.search.yearEnd === null ? 5000 : state.search.yearEnd)) || value === null) state.search.yearStart = value;
     },
     resetYearStart: (state) => {
-      state.search.yearStart = 1;
+      state.search.yearStart = null;
     },
     nextPage: (state) => {
       const total = state.collection.metadata.total_hits;

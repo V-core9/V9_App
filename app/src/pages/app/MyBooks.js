@@ -21,15 +21,13 @@ function MyBooks() {
   }, []);
 
   return (
-    <div className="content myBooks">
-      <nav className="navbar navbar-expand">
-        <div className="navbar-nav">
-          <h1>{user?.username} Books:</h1>
-          <div className="btn-group" role="group">
-            <button className="btn-primary" onClick={() => dispatch(myBooksActions.toggleNewModal())}>Create New ➕</button>
-          </div>
+    <div className="myBooks">
+      <header>
+        <h1>{user?.username} Books:</h1>
+        <div className="btn-group" role="group">
+          <button className="btn-primary" onClick={() => dispatch(myBooksActions.toggleNewModal())}>Create New ➕</button>
         </div>
-      </nav>
+      </header>
       <ul className="list-group">
         {myBooks.myBooks?.map(book =>
           <BooksListItem book={book} />

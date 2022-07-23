@@ -27,29 +27,32 @@ function Nav() {
   return (
     <nav className={[`${(nav.isOpen) ? 'shown' : ''} ${(isPC) ? 'isPC' : ''}`]}>
       {!isPC && <div className="overlay" onClick={() => dispatch(applicationActions.setIsOpen(!nav.isOpen))}></div>}
-      <section>
+      {!isPC && <header>
         <h5>Navigation</h5>
         <button onClick={() => dispatch(applicationActions.setIsOpen(!nav.isOpen))}>{nav.isOpen === true ? '❌' : '🔽'}</button>
-      </section>
+      </header>}
       <section>
-        <h2>Public</h2>
+        <h2><icon>🅿</icon><span>Public</span></h2>
         <NavItem to="/" text="Home" icon="🏠" />
         <NavItem to="/redux-counter" text="Redux Counter" icon="🔄" />
         <NavItem to="/nasa-search" text="NASA Assets" icon="🔎" />
       </section>
       {(!!authUser) && <section>
-        <h2>Application</h2>
+        <h2><icon>🚀</icon><span>Application</span></h2>
         <NavItem to="/books" text="Books" />
         <NavItem to="/my-books" text="My Books" icon="📑" />
       </section>}
       {(isAdmin) && <section>
-        <h2>Administration</h2>
+        <h2><icon>👨‍💻</icon><span>Administration</span></h2>
         <NavItem to="/dashboard" text="Dashboard" />
         <NavItem to="/users" text="Users" />
+      </section>}
+      {(isAdmin) && <section>
+        <h2><icon>👨‍💻</icon><span>Experimental</span></h2>
         <NavItem to="/functions" text="Functions" />
       </section>}
       <section>
-        <h2>Account</h2>
+        <h2><icon>👥</icon><span>Account</span></h2>
         {(!authUser) && <NavItem to="/login" text="Login" icon="🚏" />}
         {(!authUser) && <NavItem to="/register" text="Register" icon="🚀" />}
         {(!!authUser) && <NavItem to="/my-profile" text="My Profile" icon="👥" />}

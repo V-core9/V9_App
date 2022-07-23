@@ -32,7 +32,13 @@ button:hover {
 }
 
 
-
+div#root {
+  max-height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+}
 
 /*
 NEEDS SORTING OUT
@@ -51,6 +57,8 @@ nav.isPC {
   display: flex;
   flex-direction: row;
   gap: 1em;
+  overflow: auto;
+  flex: 1;
 }
 
 nav section {
@@ -58,9 +66,190 @@ nav section {
 }
 
 .main_content .content {
-  border: 1px solid green;
+  border: 4px solid #3c4b56;
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow: auto;
+}
+
+
+
+div#root {
+  max-height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+}
+
+nav icon {
+  border-right: 1px solid #343434;
+  padding: 0.25em;
+  background: #ffffff29;
+}
+
+nav section>* {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #0000002e;
+  gap: 1em;
+  margin: 0;
+  color: white;
+  text-decoration: none;
+  /* clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px)); */
+}
+
+nav span {
+  padding: 0.25em;
+}
+
+nav section {
+  gap: .5em;
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+  padding: 0 0 0.5em 0;
+}
+
+nav {
+  padding: 0.5em;
+  background: #1a242c;
+}
+
+nav section>a:hover {
+  background: #ffffff29;
+}
+
+nav a.active {
+  background: #ffffff29;
+}
+
+nav a {
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+  margin: 0 0.5em;
+}
+
+
+
+
+li.list-group-item {
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+  background: #ffffff08;
+  padding: .5em;
+}
+
+.myBooks>ul.list-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  /* border: 1px solid #8080803b; */
+  padding: 0.5em;
+  margin: 0;
+  flex: 1;
+  background: transparent;
+}
+
+.myBooks {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+li.list-group-item h5 {
+  margin: 0;
+  font-size: 1em;
+  padding: 0.25em 1em;
+}
+
+li.list-group-item>div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0000000f;
+  /* padding: 0.5em; */
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+}
+
+li.list-group-item>div small {
+  gap: 1em;
+  display: flex;
+  background: #0000001c;
+  padding: 0.25em;
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+}
+
+* {}
+
+li.list-group-item p {
+  margin: 0;
+  color: white;
+}
+
+li.list-group-item small {
+  color: #050608;
+}
+
+header {
+  /* background: transparent; */
   padding: 1em;
+  background: rgb(0 0 0 / 25%);
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+}
+
+header * {
+  margin: 0;
+}
+
+.main_content .content {
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+  background: #3c4b56;
+  margin: 1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+searchlist results a {
+  color: #00adff;
+  background: #2b3338;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  border: 1px solid black;
+}
+
+searchlist results a thumbnail {
+  min-width: 125px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+searchlist results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  padding: 0.5em;
+  background: #0000002b;
+}
+
+searchlist results a info * {
+  margin: 0;
+}
+
+searchlist results a info {
+  padding: 0.5em;
+}
+
+searchlist results a:hover {
+  background: #364148;
 }

@@ -17,7 +17,7 @@ function Users() {
   }, []);
 
   return (
-    <div className="content adminUsers">
+    <div className="adminUsers">
       <div className="d-flex w-100 justify-content-between">
         <h5 className="mb-1">Hi {user?.username}!</h5>
         <p>This is an example Admin Page</p>

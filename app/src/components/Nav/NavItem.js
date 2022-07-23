@@ -5,8 +5,8 @@ export { NavItem };
 function NavItem(props) {
   return (
     <NavLink to={props.to}>
-      {props.icon && <icon>{props.icon}</icon>}
-      {props.text && <span>{props.text}</span>}
+      <icon>{props.icon || '📦'}</icon>
+      <span>{props.text}</span>
     </NavLink>
   )
 }

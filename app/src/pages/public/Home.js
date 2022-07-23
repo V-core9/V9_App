@@ -3,7 +3,7 @@ export { Home };
 
 function Home() {
   return (
-    <div className="content">
+    <div>
       🏠 Home Page Example
     </div>
   );

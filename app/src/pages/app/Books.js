@@ -17,7 +17,7 @@ function Books() {
   }, []);
 
   return (
-    <div className="content books">
+    <div className="books">
       <h3>Public Books Listing:</h3>
       {books.length &&
         <ul className="list-group">

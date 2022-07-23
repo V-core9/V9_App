@@ -20,15 +20,13 @@ function Functions() {
   }, []);
 
   return (
-    <div className="content appFunctions">
-      <nav className="navbar navbar-expand">
-        <div className="navbar-nav">
-          <h1>System Custom Functions:</h1>
-          <div className="btn-group" role="group">
-            <button className="btn-primary" onClick={() => dispatch(appFunctionsActions.toggleNewForm())}>Create New ➕</button>
-          </div>
+    <div className="appFunctions">
+      <header>
+        <h2>System Custom Functions:</h2>
+        <div className="btn-group" role="group">
+          <button className="btn-primary" onClick={() => dispatch(appFunctionsActions.toggleNewForm())}>Create New ➕</button>
         </div>
-      </nav>
+      </header>
       <div className="row">
         {functions.length &&
           <ul className="list-group col-sm-5">
