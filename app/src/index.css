@@ -31,12 +31,29 @@ button:hover {
   transition: all .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
+.info {
+  background: rgba(100, 120, 255, 0.15);
+}
 
-div#root {
+.warning {
+  background: rgba(255, 111, 0, 0.15);
+}
+
+.error {
+  background: rgba(255, 0, 0, 0.15);
+}
+
+.success {
+  background: rgba(0, 255, 0, 0.15);
+}
+
+
+
+body {
   max-height: 100vh;
   min-height: 100vh;
   display: flex;
-  overflow: auto;
+  overflow: hidden;
   flex-direction: column;
 }
 
@@ -51,12 +68,12 @@ nav.isPC {
   position: unset;
   width: auto;
   height: auto;
+  min-width: 275px;
 }
 
 .main_content {
   display: flex;
   flex-direction: row;
-  gap: 1em;
   overflow: auto;
   flex: 1;
 }
@@ -66,7 +83,6 @@ nav section {
 }
 
 .main_content .content {
-  border: 4px solid #3c4b56;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -124,7 +140,8 @@ nav a.active {
   background: #ffffff29;
 }
 
-nav a {
+nav a,
+nav button {
   clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
   margin: 0 0.5em;
 }
@@ -191,7 +208,7 @@ li.list-group-item small {
 
 header {
   /* background: transparent; */
-  padding: 1em;
+  padding: .5em;
   background: rgb(0 0 0 / 25%);
   clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
 }
@@ -203,7 +220,7 @@ header * {
 .main_content .content {
   clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
   background: #3c4b56;
-  margin: 1em;
+  margin: .25em;
 }
 
 
@@ -211,7 +228,9 @@ header * {
 
 
 
-
+footer {
+  background: rgb(0 0 0 / 25%);
+}
 
 
 
@@ -225,6 +244,7 @@ searchlist results a {
   flex-direction: row;
   gap: 0.5em;
   border: 1px solid black;
+  text-decoration: none;
 }
 
 searchlist results a thumbnail {
@@ -232,6 +252,10 @@ searchlist results a thumbnail {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
 }
 
 searchlist results {
@@ -240,6 +264,7 @@ searchlist results {
   gap: 0.25em;
   padding: 0.5em;
   background: #0000002b;
+  overflow: auto;
 }
 
 searchlist results a info * {
@@ -248,8 +273,265 @@ searchlist results a info * {
 
 searchlist results a info {
   padding: 0.5em;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background: #0000001f;
 }
 
 searchlist results a:hover {
   background: #364148;
+}
+
+
+
+li.list-group-item>div small a {
+  border: none;
+  background: #607d8b;
+  color: white;
+  padding: 0.5em 1em;
+  border: 3px solid transparent;
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+.content section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.appFunctions {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.appFunctions>section>div {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  background: #00000014;
+  justify-content: space-between;
+  border: 1px solid transparent;
+}
+
+.appFunctions>section {
+  gap: .25em;
+  padding: .5em;
+}
+
+.appFunctions>section h5,
+.appFunctions>section p {
+  margin: 0;
+}
+
+.appFunctions>section>div .actions {
+  gap: 1em;
+  display: flex;
+  background: #ffffff0f;
+  padding: 0.25em;
+  clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
+}
+
+.appFunctions>section>div:hover {
+  box-shadow: 0 10px 20px -13px black;
+  border-color: #ffffff24;
+}
+
+
+
+
+
+
+
+
+
+/* DASHBOARD */
+
+.infoBoxes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 1em;
+}
+
+.infoBoxes>.infoBox {
+  padding: 1em;
+  flex: 1;
+  min-width: 20%;
+}
+
+
+
+
+
+
+
+/*
+PAGE PAGINATIONS
+*/
+
+
+pagination {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+pagination options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5em;
+}
+
+pagination info {}
+
+pagination options p {
+  margin: 0;
+}
+
+pagination p {
+  margin: 0;
+}
+
+pagination {
+  padding: 0.5em;
+}
+
+searchlist {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+form_group {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  padding: 0.5em;
+}
+
+
+
+
+
+
+
+
+.main_content .content section form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  padding: 0.25em;
+  gap: .5em;
+  display: flex;
+}
+
+footer p {
+  margin: 0;
+}
+
+
+.main_content .content form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+
+
+
+article.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid green;
+  padding: 0.25em;
+  flex: 1;
+  gap: 1em;
+}
+
+video {
+  width: 100%;
+  height: auto;
+}
+
+
+article.gallery>div {
+  flex: 1;
+}
+
+audio {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+}
+
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+section header .flexRow {
+  gap: 1em;
+}
+
+
+
+
+
+
+
+
+
+nav.isPC span,
+nav.isPC button span {
+  display: none;
+}
+
+nav.isPC {
+  min-width: unset;
+}
+
+nav button {
+  padding: 0;
+  border: none;
+  font-size: 1em;
+}
+
+nav button icon,
+nav a icon {
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+nav.isPC.shown {
+  min-width: 275px;
+}
+
+nav.isPC.shown span,
+nav.isPC.shown button span {
+  display: flex;
 }

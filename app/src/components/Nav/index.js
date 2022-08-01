@@ -26,7 +26,6 @@ function Nav() {
 
   return (
     <nav className={[`${(nav.isOpen) ? 'shown' : ''} ${(isPC) ? 'isPC' : ''}`]}>
-      {!isPC && <div className="overlay" onClick={() => dispatch(applicationActions.setIsOpen(!nav.isOpen))}></div>}
       {!isPC && <header>
         <h5>Navigation</h5>
         <button onClick={() => dispatch(applicationActions.setIsOpen(!nav.isOpen))}>{nav.isOpen === true ? '❌' : '🔽'}</button>
@@ -37,26 +36,27 @@ function Nav() {
         <NavItem to="/redux-counter" text="Redux Counter" icon="🔄" />
         <NavItem to="/nasa-search" text="NASA Assets" icon="🔎" />
       </section>
-      {(!!authUser) && <section>
+      {(!!authUser) && <section className="success">
         <h2><icon>🚀</icon><span>Application</span></h2>
-        <NavItem to="/books" text="Books" />
+        <NavItem to="/books" text="Books" icon="📚" />
         <NavItem to="/my-books" text="My Books" icon="📑" />
       </section>}
-      {(isAdmin) && <section>
-        <h2><icon>👨‍💻</icon><span>Administration</span></h2>
-        <NavItem to="/dashboard" text="Dashboard" />
-        <NavItem to="/users" text="Users" />
+      {(isAdmin) && <section className="warning">
+        <h2><icon>👷‍♂️</icon><span>Administration</span></h2>
+        <NavItem to="/dashboard" text="Dashboard" icon="👨‍💻" />
+        <NavItem to="/users" text="Users" icon="👥" />
       </section>}
-      {(isAdmin) && <section>
-        <h2><icon>👨‍💻</icon><span>Experimental</span></h2>
-        <NavItem to="/functions" text="Functions" />
+      {(isAdmin) && <section className="warning">
+        <h2><icon>🚩</icon><span>Experimental</span></h2>
+        <NavItem to="/functions" text="Functions" icon="➰" />
+        <NavItem to="/functions-old" text="Functions [old]" icon="🔻" />
       </section>}
-      <section>
+      <section className="info">
         <h2><icon>👥</icon><span>Account</span></h2>
-        {(!authUser) && <NavItem to="/login" text="Login" icon="🚏" />}
-        {(!authUser) && <NavItem to="/register" text="Register" icon="🚀" />}
-        {(!!authUser) && <NavItem to="/my-profile" text="My Profile" icon="👥" />}
-        {(!!authUser) && <button onClick={() => dispatch(authActions.logout())}>🔻 Logout</button>}
+        {(!authUser) && <NavItem title="Login" to="/login" text="Login" icon="🚏" />}
+        {(!authUser) && <NavItem title="Register" to="/register" text="Register" icon="🚀" />}
+        {(!!authUser) && <NavItem title="My Profile" to="/my-profile" text="My Profile" icon="👥" />}
+        {(!!authUser) && <button title="Logout" onClick={() => dispatch(authActions.logout())} className='warning'><icon>🔻</icon><span>Logout</span></button>}
       </section>
     </nav>
   );

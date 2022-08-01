@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { BookNewModal, BooksListItem, BookEditModal } from '../../components';
+import { BookNewModal, BooksListItem, BookEditModal, NavItem } from '../../components';
 
 import { myBooksActions } from '../../store';
 
@@ -25,7 +25,7 @@ function MyBooks() {
       <header>
         <h1>{user?.username} Books:</h1>
         <div className="btn-group" role="group">
-          <button className="btn-primary" onClick={() => dispatch(myBooksActions.toggleNewModal())}>Create New ➕</button>
+          <NavItem to="/my-books/new" text="Create New" icon="➕" />
         </div>
       </header>
       <ul className="list-group">

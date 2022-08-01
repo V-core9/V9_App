@@ -1,6 +1,7 @@
 // PUBLIC
 export * from './Counter';
 export * from './Nav';
+export * from './Nav/NavItem';
 export * from './Header';
 export * from './Footer';
 
@@ -19,7 +20,7 @@ export * from './BooksListItem';
 export * from './PublicBooksListItem';
 
 // ADMIN
-export * from './PrivateRouteAdmin';
+export * from './AdminRoute';
 
 export * from './appFunctions/AppFunctionsEditor';
 export * from './appFunctions/AppFunctionsForm';

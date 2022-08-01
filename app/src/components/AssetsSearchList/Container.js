@@ -10,36 +10,47 @@ import SearchListFilter from './Filter';
 import SearchListPagination from './Pagination';
 
 function AssetsSearchListContainer() {
-    const dispatch = useDispatch();
-    const { collection, status, search } = useSelector(x => x.nasaAssets);
+  const dispatch = useDispatch();
+  const { collection, status, search } = useSelector(x => x.nasaAssets);
 
-    let totalPages = Math.ceil((collection?.metadata?.total_hits || 0) / 100);
+  let totalPages = Math.ceil((collection?.metadata?.total_hits || 0) / 100);
 
-    if (totalPages > 100) totalPages = 100;
+  if (totalPages > 100) totalPages = 100;
 
-    let paginationOptions = [];
+  let paginationOptions = [];
 
-    useEffect(() => {
-        // Prevent the page from loosing scroll position when you go back to it.
-        if (collection.items === undefined) dispatch(startSearch(search));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  useEffect(() => {
+    // Prevent the page from loosing scroll position when you go back to it.
+    if (collection.items === undefined) dispatch(startSearch(search));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    for (let i = 1; i <= totalPages; i++) {
-        paginationOptions.push((search.page === i) ? <option value={i} selected>{i}</option> : <option value={i} >{i}</option>);
-    }
+  for (let i = 1; i <= totalPages; i++) {
+    paginationOptions.push((search.page === i) ? <option value={i} selected>{i}</option> : <option value={i} >{i}</option>);
+  }
 
-    return (
-        <searchlist>
-            <SearchListFilter />
-            <results>
-                {status === 'loading' && <p>➰ Loading...</p>}
-                {status === 'error' && <p>🔻 Error: Your IP might get banned for loading too much data in short period of time if you navigate many pages in short time.</p>}
-                {collection.items?.map(item => <SearchListItem data={item} />)}
-            </results>
-            <SearchListPagination />
-        </searchlist>
-    );
+  return (
+    <searchlist>
+      <header>
+        <h2>Dashboard</h2>
+        <div>
+          <select>
+            <option value="1000">1000s</option>
+            <option value="5000">5000s</option>
+            <option value="10000">10000s</option>
+          </select>
+          <button>Refresh</button>
+        </div>
+      </header>
+      <SearchListFilter />
+      <results>
+        {status === 'loading' && <p>➰ Loading...</p>}
+        {status === 'error' && <p>🔻 Error: Your IP might get banned for loading too much data in short period of time if you navigate many pages in short time.</p>}
+        {collection.items?.map(item => <SearchListItem data={item} />)}
+      </results>
+      <SearchListPagination />
+    </searchlist>
+  );
 };
 
 export default AssetsSearchListContainer;

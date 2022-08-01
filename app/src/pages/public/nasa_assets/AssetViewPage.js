@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+
 //import './nasa.scss';
 
 function AssetViewPage() {
@@ -59,15 +60,18 @@ function AssetViewPage() {
   }
 
   return (
-    <div className="content">
+    <section>
 
-      <nav>
-        <button onClick={(e) => window.history.back()}>Back</button>
-      </nav>
+      <header>
+        <div className="flexRow">
+          <button onClick={(e) => window.history.back()}>Back</button>
+          <h2>{info.title}</h2>
+        </div>
+      </header>
 
 
-      <article>
-        <gallery>
+      <article className="gallery">
+        <div>
           {isImage && <img src={data.collection?.items[0].links[0].href} alt={info.title} />}
           {
             audioSrc !== '' &&
@@ -83,13 +87,11 @@ function AssetViewPage() {
               Your browser does not support the video tag.
             </video>
           }
-        </gallery >
+        </div >
 
-        <info>
+        <div>
 
           <section className="baseInfo">
-            <h2>{info.title}</h2>
-
             <div dangerouslySetInnerHTML={{ __html: info.description }}></div>
           </section>
 
@@ -103,9 +105,9 @@ function AssetViewPage() {
           {info.photographer && <p>📸 Photographer: {info.photographer}</p>}
           {info.location && <p>📍 Location: {info.location}</p>}
           <small>Post ID: {nasa_id}</small>
-        </info>
+        </div>
       </article>
-    </div>
+    </section>
   );
 };
 

@@ -1,8 +1,25 @@
 import { Routes, Route, Navigate, useNavigate, useLocation, BrowserRouter as Router } from 'react-router-dom';
 
 import { history } from './helpers';
-import { Nav, Header, Footer, PrivateRoute, PrivateRouteAdmin } from './components';
-import { Home, Login, MyBooks, Register, Books, Users, Functions, Dashboard, ReduxCounter, SearchPage, AssetViewPage, MyProfile } from './pages';
+import { Nav, Header, Footer, PrivateRoute, AdminRoute } from './components';
+import {
+  Home,
+  Login,
+  MyBooks,
+  MyBooksNew,
+  MyBooksEdit,
+  Register,
+  Books,
+  Users,
+  Functions,
+  FunctionsEdit,
+  FunctionsOld,
+  Dashboard,
+  ReduxCounter,
+  SearchPage,
+  AssetViewPage,
+  MyProfile
+} from './pages';
 
 function App() {
   return (
@@ -14,7 +31,6 @@ function App() {
           <AppRoutes />
         </div>
       </div>
-      <Footer />
     </Router>
   )
 }
@@ -35,12 +51,16 @@ function AppRoutes() {
 
       <Route path="/books" element={<PrivateRoute><Books /></PrivateRoute>} />
       <Route path="/my-books" element={<PrivateRoute><MyBooks /></PrivateRoute>} />
+      <Route path="/my-books/new" element={<PrivateRoute><MyBooksNew /></PrivateRoute>} />
+      <Route path="/my-books/edit/:book_id" element={<PrivateRoute><MyBooksEdit /></PrivateRoute>} />
       <Route path="/my-profile" element={<PrivateRoute><MyProfile /></PrivateRoute>} />
 
 
-      <Route path="/dashboard" element={<PrivateRouteAdmin><Dashboard /></PrivateRouteAdmin>} />
-      <Route path="/users" element={<PrivateRouteAdmin><Users /></PrivateRouteAdmin>} />
-      <Route path="/functions" element={<PrivateRouteAdmin> <Functions /> </PrivateRouteAdmin>} />
+      <Route path="/dashboard" element={<PrivateRoute><AdminRoute><Dashboard /></AdminRoute></PrivateRoute>} />
+      <Route path="/users" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
+      <Route path="/functions" element={<PrivateRoute><AdminRoute> <Functions /> </AdminRoute></PrivateRoute>} />
+      <Route path="/functions/:func_id" element={<PrivateRoute><AdminRoute> <FunctionsEdit /> </AdminRoute></PrivateRoute>} />
+      <Route path="/functions-old" element={<PrivateRoute><AdminRoute> <Functions /> </AdminRoute></PrivateRoute>} />
 
 
       <Route path="/login" element={<Login />} />

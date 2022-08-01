@@ -1,58 +1,46 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppFunctionsNewModal, AppFunctionsEditor } from '../../components';
-
+import { NavLink } from 'react-router-dom';
 import { appFunctionsActions } from '../../store';
 
 export { Functions };
 
 function Functions() {
   const dispatch = useDispatch();
-  const user = useSelector(x => x.auth.user);
   const { appFunctions: functions } = useSelector(x => x.appFunctions);
 
   useEffect(() => {
-    console.log(functions);
-    console.log(appFunctionsActions);
     dispatch(appFunctionsActions.getAll());
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="appFunctions">
       <header>
-        <h2>System Custom Functions:</h2>
-        <div className="btn-group" role="group">
-          <button className="btn-primary" onClick={() => dispatch(appFunctionsActions.toggleNewForm())}>Create New ➕</button>
+        <h2>Better System Functions:</h2>
+        <div>
+          <button onClick={() => dispatch(appFunctionsActions.toggleNewForm())}>Create New ➕</button>
         </div>
       </header>
-      <div className="row">
-        {functions.length &&
-          <ul className="list-group col-sm-5">
-            {functions.map(func =>
-              <li className="list-group-item" key={func.id}>
-                <div className="card">
-                  <div className="card-body" title={func.name}>
-                    <div className="d-flex w-100 justify-content-between">
-                      <h5 className="mb-1">{func.name}</h5>
-                      <small>
-                        <button className="btn-secondary" onClick={() => dispatch(appFunctionsActions.editFunction(func.id))}>🎨 Edit</button>
-                        <button className="btn-danger" onClick={() => dispatch(appFunctionsActions.deleteFunction(func.id))}>❌ Delete</button>
-                      </small>
-                    </div>
-                    <p className="mb-0">📑 {func.description}</p>
-                  </div>
-                </div>
-              </li>
-            )}
-          </ul>
-        }
+      <section>
+        {functions.length && functions.map(func =>
+          <div title={func.name}>
+            <div className="itemInfo">
+              <h5>{func.name}</h5>
+              <p className="mb-0">📑 {func.description}</p>
+            </div>
+            <div className='actions'>
+              <NavLink to={"/functions/" + func.id} >🎨 Edit</NavLink>
+              <button onClick={() => dispatch(appFunctionsActions.deleteFunction(func.id))}>❌ Delete</button>
+            </div>
+          </div>
+        )}
         {functions.loading && <div className="spinner-border spinner-border-sm"></div>}
         {functions.error && <div className="text-danger">Error loading users: {functions.error.message}</div>}
-        <AppFunctionsNewModal />
-        <AppFunctionsEditor />
-      </div>
+      </section>
+      <footer>
+        <p>PAGINATION SPACE</p>
+      </footer>
     </div >
   );
 }

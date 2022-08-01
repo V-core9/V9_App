@@ -12,9 +12,13 @@ export * from './public/nasa_assets/AssetViewPage';
 // Application [Private] Pages
 export * from './app/Books';
 export * from './app/MyBooks';
+export * from './app/MyBooksNew';
+export * from './app/MyBooksEdit';
 export * from './app/MyProfile';
 
 // Admin [Private] Pages
 export * from './admin/Dashboard';
 export * from './admin/Users';
+export * from './admin/FunctionsOld';
 export * from './admin/Functions';
+export * from './admin/FunctionsEdit';

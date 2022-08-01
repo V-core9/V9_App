@@ -11,7 +11,7 @@ const initialState = {
     description: '',
     location: '',
     page: 1,
-    media_type: []
+    media_type: ['audio', 'video', 'image']
   },
 };
 

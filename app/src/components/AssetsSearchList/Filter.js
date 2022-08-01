@@ -38,9 +38,9 @@ function SearchListFiler() {
 
             <form_group>
               <label for="media_type">Media Type</label>
-              <action onClick={(e) => dispatch(toggleAudioMediaType())} className={(search.media_type.indexOf('audio') !== -1) ? 'greenAction' : ''}>Audio</action>
-              <action onClick={(e) => dispatch(toggleVideoMediaType())} className={(search.media_type.indexOf('video') !== -1) ? 'greenAction' : ''}>Video</action>
-              <action onClick={(e) => dispatch(toggleImageMediaType())} className={(search.media_type.indexOf('image') !== -1) ? 'greenAction' : ''}>Image</action>
+              <button onClick={(e) => { e.preventDefault(); dispatch(toggleAudioMediaType()) }} className={(search.media_type.indexOf('audio') !== -1) ? 'success' : ''}>Audio</button>
+              <button onClick={(e) => { e.preventDefault(); dispatch(toggleVideoMediaType()) }} className={(search.media_type.indexOf('video') !== -1) ? 'success' : ''}>Video</button>
+              <button onClick={(e) => { e.preventDefault(); dispatch(toggleImageMediaType()) }} className={(search.media_type.indexOf('image') !== -1) ? 'success' : ''}>Image</button>
             </form_group>
 
             <form_group>
