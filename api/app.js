@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const compression = require('compression')
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -6,7 +7,6 @@ const morgan = require('morgan');
 const xPoweredByRandom = require('x-powered-by-random');
 const helmet = require('helmet');
 const cors = require('cors');
-const swaggerUi = require('swagger-ui-express');
 
 const { notFound, errorHandler } = require('./middlewares');
 
@@ -17,11 +17,8 @@ const bookmarksRouter = require('./routes/bookmarks');
 const booksRouter = require('./routes/books');
 const functionsRouter = require('./routes/functions');
 
-const swaggerSpec = require('./swaggerSpec');
 
 const app = express();
-
-app.use(xPoweredByRandom);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(compression());
+app.use(xPoweredByRandom);
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
@@ -42,9 +41,11 @@ app.use('/books', booksRouter);
 app.use('/bookmarks', bookmarksRouter);
 app.use('/functions', functionsRouter);
 
-const isDev = (process.env.NODE_ENV === 'development');
-
-if (isDev) app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+if (process.env.NODE_ENV === 'development') {
+  const swaggerUi = require('swagger-ui-express');
+  const swaggerSpec = require('./swaggerSpec');
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+}
 
 app.use(notFound);
 app.use(errorHandler);

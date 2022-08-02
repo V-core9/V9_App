@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { BookNewModal, BooksListItem, BookEditModal, NavItem } from '../../components';
+import { BooksListItem, NavItem } from '../../components';
 
 import { myBooksActions } from '../../store';
 
@@ -24,9 +24,7 @@ function MyBooks() {
     <div className="myBooks">
       <header>
         <h1>{user?.username} Books:</h1>
-        <div className="btn-group" role="group">
-          <NavItem to="/my-books/new" text="Create New" icon="➕" />
-        </div>
+        <NavItem to="/my-books/new" text="Create New" icon="➕" className='button' />
       </header>
       <ul className="list-group">
         {myBooks.myBooks?.map(book =>
@@ -35,8 +33,6 @@ function MyBooks() {
       </ul>
       {myBooks.loading && <div className="spinner-border spinner-border-sm"></div>}
       {myBooks.error && <div className="text-danger">Error loading MyBooks: {myBooks.error.message}</div>}
-      <BookNewModal />
-      <BookEditModal />
     </div>
   );
 }

@@ -59,21 +59,21 @@ function AppFunctionsEditForm() {
           <h4 className="card-header">Edit AppFunction Form</h4>
         </header>
         <section >
-          <div className="form-group">
+          <form_group>
             <label>Name</label>
             <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} value={name} onChange={(e) => setName(e.target.value)} />
             <div className="invalid-feedback">{errors.name?.message}</div>
-          </div>
-          <div className="form-group">
+          </form_group>
+          <form_group>
             <label>Description</label>
             <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} value={description} onChange={(e) => setDescription(e.target.value)} />
             <div className="invalid-feedback">{errors.description?.message}</div>
-          </div>
-          <div className="form-group">
+          </form_group>
+          <form_group>
             <label>Content</label>
             <textarea name="content" type="text" {...register('content')} className={`form-control ${errors.content ? 'is-invalid' : ''}`} value={content} onChange={(e) => setContent(e.target.value)} />
             <div className="invalid-feedback">{errors.content?.message}</div>
-          </div>
+          </form_group>
         </section>
         <footer>
           <button disabled={isSubmitting} className="btn btn-primary">

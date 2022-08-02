@@ -22,7 +22,7 @@ export * from './PublicBooksListItem';
 // ADMIN
 export * from './AdminRoute';
 
-export * from './appFunctions/AppFunctionsEditor';
+//export * from './appFunctions/AppFunctionsEditor';
 export * from './appFunctions/AppFunctionsForm';
 export * from './appFunctions/AppFunctionsNewModal';
 

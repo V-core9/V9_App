@@ -15,6 +15,7 @@ code {
     monospace;
 }
 
+a.button,
 button {
   border: none;
   background: #607d8b;
@@ -24,6 +25,7 @@ button {
   clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
 }
 
+a.button:hover,
 button:hover {
   background: #3c525c;
   cursor: pointer;
@@ -44,6 +46,26 @@ button:hover {
 }
 
 .success {
+  background: rgba(0, 255, 0, 0.15);
+}
+
+button.info,
+.button.info {
+  background: rgba(100, 120, 255, 0.15);
+}
+
+button.warning,
+.button.warning {
+  background: rgba(255, 111, 0, 0.15);
+}
+
+button.error,
+.button.error {
+  background: rgba(255, 0, 0, 0.15);
+}
+
+button.success,
+.button.success {
   background: rgba(0, 255, 0, 0.15);
 }
 

@@ -1,0 +1,54 @@
+$error-size: 225px;
+$font-fam: 'Open Sans', sans-serif;
+
+
+.pageNotFound {
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    height: 175px;
+    overflow: visible;
+    display: inline-block;
+  }
+
+  h1 {
+    font-size: $error-size;
+    font-weight: 300;
+    margin: 0;
+    padding: 0l;
+    color: #607d8b;
+    font-family: $font-fam;
+  }
+
+  a {
+    font-size: 16px;
+    font-weight: 300;
+    color: #607d8b;
+    text-decoration: none;
+  }
+
+  p {
+    font-size: 10px;
+    font-weight: 300;
+    color: #607d8b;
+    text-decoration: none;
+  }
+}
+
+#icon-compass {
+  .needle {
+    transform-origin: center;
+    animation: spin 3.5 1;
+    -webkit-animation: spin 3.5s 1;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.5, -0.5, .5, 1.5);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

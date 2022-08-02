@@ -19,32 +19,32 @@ function Dashboard() {
         <div className='infoBoxes'>
 
           <div className='infoBox success'>
-            <p>Some Info</p>
-            <p>+25%</p>
-          </div>
-
-          <div className='infoBox info'>
-            <p>Some Info</p>
+            <p>Downloads</p>
             <p>+5%</p>
           </div>
 
           <div className='infoBox warning'>
-            <p>Some Info</p>
+            <p>Questions</p>
             <p>-5%</p>
           </div>
 
           <div className='infoBox info'>
-            <p>Some Info</p>
+            <p>Views</p>
             <p>+5%</p>
           </div>
 
-          <div className='infoBox info'>
-            <p>Some Info</p>
-            <p>+5%</p>
+          <div className='infoBox error'>
+            <p>Performance</p>
+            <p>-75%</p>
           </div>
 
           <div className='infoBox info'>
-            <p>Some Info</p>
+            <p>Sales</p>
+            <p>+5%</p>
+          </div>
+
+          <div className='infoBox success'>
+            <p>Messages</p>
             <p>+5%</p>
           </div>
 

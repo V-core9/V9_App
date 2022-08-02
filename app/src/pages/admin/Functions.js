@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { appFunctionsActions } from '../../store';
 
+import { NavItem } from '../../components';
+
 export { Functions };
 
 function Functions() {
@@ -30,7 +32,7 @@ function Functions() {
               <p className="mb-0">📑 {func.description}</p>
             </div>
             <div className='actions'>
-              <NavLink to={"/functions/" + func.id} >🎨 Edit</NavLink>
+              <NavItem to={"/functions/" + func.id} icon="🎨" text="Edit" className='button info' />
               <button onClick={() => dispatch(appFunctionsActions.deleteFunction(func.id))}>❌ Delete</button>
             </div>
           </div>

@@ -55,21 +55,21 @@ function BookEditForm() {
         <small>ID: {book.id}</small>
       </header>
       <section>
-        <div className="form-group">
+        <form_group>
           <label>Title</label>
           <input name="title" type="text" {...register('title')} className={`form-control ${errors.title ? 'is-invalid' : ''}`} value={title} onChange={(e) => setTitle(e.target.value)} />
           <div className="invalid-feedback">{errors.title?.message}</div>
-        </div>
-        <div className="form-group">
+        </form_group>
+        <form_group>
           <label>Description</label>
           <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} value={description} onChange={(e) => setDescription(e.target.value)} />
           <div className="invalid-feedback">{errors.description?.message}</div>
-        </div>
-        <div className="form-group">
+        </form_group>
+        <form_group>
           <label>Content</label>
           <textarea name="content" type="text" {...register('content')} className={`form-control ${errors.content ? 'is-invalid' : ''}`} value={content} onChange={(e) => setContent(e.target.value)} />
           <div className="invalid-feedback">{errors.content?.message}</div>
-        </div>
+        </form_group>
       </section>
       <footer>
         <button disabled={isSubmitting} className="success">{isSubmitting && <span className='info'>🚀 LOADING...</span>}✅ Update</button>

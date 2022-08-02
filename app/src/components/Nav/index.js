@@ -46,10 +46,10 @@ function Nav() {
         <NavItem to="/dashboard" text="Dashboard" icon="👨‍💻" />
         <NavItem to="/users" text="Users" icon="👥" />
       </section>}
-      {(isAdmin) && <section className="warning">
+      {(isAdmin) && <section className="error">
         <h2><icon>🚩</icon><span>Experimental</span></h2>
         <NavItem to="/functions" text="Functions" icon="➰" />
-        <NavItem to="/functions-old" text="Functions [old]" icon="🔻" />
+        <NavItem to="/error-404" text="404 Error" icon="🔻" />
       </section>}
       <section className="info">
         <h2><icon>👥</icon><span>Account</span></h2>

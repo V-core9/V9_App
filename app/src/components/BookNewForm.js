@@ -43,28 +43,28 @@ function BookNewForm() {
         <h4>New Book Form</h4>
       </header>
       <section>
-        <div className="form-group">
+        <form_group>
           <label>Title</label>
           <input name="title" type="text" {...register('title')} className={`form-control ${errors.title ? 'is-invalid' : ''}`} />
           <div className="invalid-feedback">{errors.title?.message}</div>
-        </div>
-        <div className="form-group">
+        </form_group>
+        <form_group>
           <label>Description</label>
           <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} />
           <div className="invalid-feedback">{errors.description?.message}</div>
-        </div>
-        <div className="form-group">
+        </form_group>
+        <form_group>
           <label>Content</label>
           <textarea name="content" type="text" {...register('content')} className={`form-control ${errors.content ? 'is-invalid' : ''}`} />
           <div className="invalid-feedback">{errors.content?.message}</div>
-        </div>
+        </form_group>
       </section>
       <footer>
         <button disabled={isSubmitting} className="btn btn-primary">
           {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
           Create
         </button>
-        <NavItem to="/my-books" text="Close" icon="❌" />
+        <NavItem to="/my-books" text="Cancel" icon="❌" className="button warning" />
       </footer>
     </form>
   )

@@ -3,22 +3,27 @@ import { Routes, Route, Navigate, useNavigate, useLocation, BrowserRouter as Rou
 import { history } from './helpers';
 import { Nav, Header, Footer, PrivateRoute, AdminRoute } from './components';
 import {
+  // Public pages
   Home,
   Login,
+  Register,
+  ReduxCounter,
+  PageNotFound,
+  // Application Pages
   MyBooks,
   MyBooksNew,
   MyBooksEdit,
-  Register,
   Books,
+  // Account Pages
+  MyProfile,
+  // Admin Pages
+  Dashboard,
   Users,
   Functions,
   FunctionsEdit,
-  FunctionsOld,
-  Dashboard,
-  ReduxCounter,
+  // NASA Thing
   SearchPage,
   AssetViewPage,
-  MyProfile
 } from './pages';
 
 function App() {
@@ -60,14 +65,14 @@ function AppRoutes() {
       <Route path="/users" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
       <Route path="/functions" element={<PrivateRoute><AdminRoute> <Functions /> </AdminRoute></PrivateRoute>} />
       <Route path="/functions/:func_id" element={<PrivateRoute><AdminRoute> <FunctionsEdit /> </AdminRoute></PrivateRoute>} />
-      <Route path="/functions-old" element={<PrivateRoute><AdminRoute> <Functions /> </AdminRoute></PrivateRoute>} />
 
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
 
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<PageNotFound />} />
+
     </Routes>
   )
 }
