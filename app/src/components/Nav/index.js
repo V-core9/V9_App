@@ -34,7 +34,7 @@ function Nav() {
         <h2><icon>🅿</icon><span>Public</span></h2>
         <NavItem to="/" text="Home" icon="🏠" />
         <NavItem to="/redux-counter" text="Redux Counter" icon="🔄" />
-        <NavItem to="/nasa-search" text="NASA Assets" icon="🔎" />
+        <NavItem to="/nasa-assets" text="NASA Assets" icon="🔎" />
       </section>
       {(!!authUser) && <section className="success">
         <h2><icon>🚀</icon><span>Application</span></h2>

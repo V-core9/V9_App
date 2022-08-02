@@ -50,14 +50,16 @@ function AppRoutes() {
       <Route path="/redux-counter" element={<ReduxCounter />} />
 
 
-      <Route path="/nasa-search" element={<SearchPage />} />
-      <Route path="/nasa-asset/:nasa_id" element={<AssetViewPage />} />
+      <Route path="/nasa-assets" element={<SearchPage />} />
+      <Route path="/nasa-assets/view/:nasa_id" element={<AssetViewPage />} />
 
 
       <Route path="/books" element={<PrivateRoute><Books /></PrivateRoute>} />
+
       <Route path="/my-books" element={<PrivateRoute><MyBooks /></PrivateRoute>} />
       <Route path="/my-books/new" element={<PrivateRoute><MyBooksNew /></PrivateRoute>} />
       <Route path="/my-books/edit/:book_id" element={<PrivateRoute><MyBooksEdit /></PrivateRoute>} />
+
       <Route path="/my-profile" element={<PrivateRoute><MyProfile /></PrivateRoute>} />
 
 

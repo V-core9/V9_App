@@ -557,3 +557,30 @@ nav.isPC.shown span,
 nav.isPC.shown button span {
   display: flex;
 }
+
+
+
+
+
+keywords {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+keywords>p {
+  padding: 0.5em;
+  background: #2a353e;
+  margin: 0;
+  white-space: nowrap;
+}
+
+section.keywords h2 {
+  margin: 0;
+}
+
+section.keywords {
+  padding: 1em;
+  /* border: 1px solid gray; */
+  gap: 1em;
+}
