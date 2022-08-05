@@ -18,6 +18,10 @@ function SearchListFiler() {
     dispatch(startNewSearch());
   };
 
+  const isMediaAudio = (search.media_type.indexOf('audio') !== -1);
+  const isMediaVideo = (search.media_type.indexOf('video') !== -1);
+  const isMediaImage = (search.media_type.indexOf('image') !== -1);
+
 
   return (
     <filter>
@@ -41,9 +45,9 @@ function SearchListFiler() {
             <form_group>
               <label for="media_type">Media Type</label>
               <div>
-                <button onClick={(e) => { e.preventDefault(); dispatch(toggleAudioMediaType()) }} className={(search.media_type.indexOf('audio') !== -1) ? 'success' : 'error'}>Audio</button>
-                <button onClick={(e) => { e.preventDefault(); dispatch(toggleVideoMediaType()) }} className={(search.media_type.indexOf('video') !== -1) ? 'success' : 'error'}>Video</button>
-                <button onClick={(e) => { e.preventDefault(); dispatch(toggleImageMediaType()) }} className={(search.media_type.indexOf('image') !== -1) ? 'success' : 'error'}>Image</button>
+                <action onClick={() => dispatch(toggleAudioMediaType())} className={(isMediaAudio ? 'success' : 'error') + ' button'}>{isMediaAudio ? '✔' : '✖'} Audio</action>
+                <action onClick={() => dispatch(toggleVideoMediaType())} className={(isMediaVideo ? 'success' : 'error') + ' button'}>{isMediaVideo ? '✔' : '✖'} Video</action>
+                <action onClick={() => dispatch(toggleImageMediaType())} className={(isMediaImage ? 'success' : 'error') + ' button'}>{isMediaImage ? '✔' : '✖'} Image</action>
               </div>
             </form_group>
 

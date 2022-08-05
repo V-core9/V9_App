@@ -23,6 +23,7 @@ import {
   // Admin Pages
   Dashboard,
   Users,
+  UsersNew,
   Functions,
   FunctionsEdit,
   // NASA Thing
@@ -71,7 +72,7 @@ function AppRoutes() {
       <Route path="/dashboard" element={<PrivateRoute><AdminRoute><Dashboard /></AdminRoute></PrivateRoute>} />
 
       <Route path="/users" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
-      <Route path="/users/new" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
+      <Route path="/users/new" element={<PrivateRoute><AdminRoute><UsersNew /></AdminRoute></PrivateRoute>} />
       <Route path="/users/edit/:user_id" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
 
 

@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
-
+import Editor from "@monaco-editor/react";
 import { appFunctionsActions } from '../../store';
 
 const { endEditFunction, updateFunction } = appFunctionsActions;
@@ -34,19 +34,11 @@ function AppFunctionsEditForm() {
     setContent('');
   }
 
-  // form validation rules
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Function Name is required'),
-    content: Yup.string().required('Function Content is required')
-  });
-
-  const formOptions = { resolver: yupResolver(validationSchema) };
-
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState } = useForm();
   const { errors, isSubmitting } = formState;
 
-  function onSubmit({ }) {
+  function onSubmit() {
     dispatch(updateFunction({ id: func_id, name, content, description }));
     resetInputs();
     return dispatch(endEditFunction());
@@ -56,31 +48,41 @@ function AppFunctionsEditForm() {
     <div >
       <form onSubmit={handleSubmit(onSubmit)}>
         <header>
-          <h4 className="card-header">Edit AppFunction Form</h4>
+          <h2>Edit AppFunction Form</h2>
         </header>
         <section >
+
           <form_group>
             <label>Name</label>
             <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} value={name} onChange={(e) => setName(e.target.value)} />
             <div className="invalid-feedback">{errors.name?.message}</div>
           </form_group>
+
           <form_group>
             <label>Description</label>
             <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} value={description} onChange={(e) => setDescription(e.target.value)} />
             <div className="invalid-feedback">{errors.description?.message}</div>
           </form_group>
-          <form_group>
-            <label>Content</label>
-            <textarea name="content" type="text" {...register('content')} className={`form-control ${errors.content ? 'is-invalid' : ''}`} value={content} onChange={(e) => setContent(e.target.value)} />
-            <div className="invalid-feedback">{errors.content?.message}</div>
-          </form_group>
+
+          <header>
+            <h4>Script Code</h4>
+          </header>
+          <Editor
+            height="90vh"
+            defaultLanguage="javascript"
+            theme="vs-dark"
+            defaultValue={content}
+            onChange={setContent}
+          />
+          <div className="invalid-feedback">{errors.content?.message}</div>
+
         </section>
         <footer>
-          <button disabled={isSubmitting} className="btn btn-primary">
-            {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+          <button disabled={isSubmitting} className="success">
+            {isSubmitting && <span className>SAVING...</span>}
             🚀 Save
           </button>
-          <button type="button" className="btn btn-secondary" onClick={() => dispatch(endEditFunction())}>❌ Cancel</button>
+          <button type="button" className="error" onClick={() => dispatch(endEditFunction())}>❌ Cancel</button>
         </footer>
       </form>
     </div>

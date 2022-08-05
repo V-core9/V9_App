@@ -657,12 +657,13 @@ section.keywords {
 .adminUsers>section>div {
   display: flex;
   flex-direction: column;
-  border: 1px solid transparent;
+  border: 1px solid #0000000d;
 }
 
 .adminUsers>section>div:hover {
   background: #ffffff0f;
   border: 1px solid #00000075;
+  box-shadow: 0 10px 20px -10px black;
 }
 
 .adminUsers>section {
@@ -1022,8 +1023,13 @@ nav.isPC.shown>section a icon {
   border-bottom: 1px solid #0000005c;
 }
 
-.main_content .content header {
+#root>div.main_content>div>section>header {
   padding: .5em 1em;
   clip-path: unset;
   background: #3e4659;
+}
+
+
+.monaco-editor {
+  min-height: 500px !important;
 }
