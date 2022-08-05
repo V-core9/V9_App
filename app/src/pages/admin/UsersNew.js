@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavItem } from '../../components';
 import { userActions } from '../../store';
 
-export { Users };
+export { UsersNew };
 
-function Users() {
+function UsersNew() {
   const dispatch = useDispatch();
   const user = useSelector(x => x.auth.user);
   const { users } = useSelector(x => x.users);
@@ -29,8 +29,10 @@ function Users() {
             <div title={user.username} key={user.id}>
               <header>
                 <div>
-                  <h5>{user.isAdmin ? '👨‍💻 Admin' : '👤 User'} : {user.username}</h5>
-                  <p>📧 {user.email}</p>
+                  <h5 className="mb-1">{user.username}</h5>
+                  <p className="mb-0">🆔 {user.id}</p>
+                  <p className="mb-1">📧 {user.email}</p>
+                  <small>Account Type: {user.isAdmin ? '👨‍💻 Admin' : '👤 User'}</small>
                 </div>
                 <small>
                   <NavItem className="button info" icon="🎨" text="Edit" to={'/users/edit/' + user.id} />

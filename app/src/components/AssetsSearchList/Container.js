@@ -31,17 +31,6 @@ function AssetsSearchListContainer() {
 
   return (
     <searchlist>
-      <header>
-        <h2>Dashboard</h2>
-        <div>
-          <select>
-            <option value="1000">1000s</option>
-            <option value="5000">5000s</option>
-            <option value="10000">10000s</option>
-          </select>
-          <button>Refresh</button>
-        </div>
-      </header>
       <SearchListFilter />
       <results>
         {status === 'loading' && <p>➰ Loading...</p>}

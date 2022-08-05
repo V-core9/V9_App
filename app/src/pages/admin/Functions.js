@@ -17,7 +17,7 @@ function Functions() {
   }, []);
 
   return (
-    <div className="appFunctions">
+    <section className="appFunctions">
       <header>
         <h2>Better System Functions:</h2>
         <div>
@@ -43,6 +43,6 @@ function Functions() {
       <footer>
         <p>PAGINATION SPACE</p>
       </footer>
-    </div >
+    </section >
   );
 }

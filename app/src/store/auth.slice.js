@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import jwt_decode from "jwt-decode";
 
+import { toast } from 'react-toastify';
+
 import { history, fetchWrapper } from '../helpers';
 
 // create slice
@@ -19,6 +21,7 @@ const slice = createSlice({
     logout(state) {
       state.user = null;
       localStorage.removeItem('user');
+      toast("User Logged Out!", { type: "info" });
       //window.location.reload();
     },
   },
@@ -27,6 +30,7 @@ const slice = createSlice({
     builder
       .addCase(login.pending, (state) => {
         state.error = null;
+        // toast("Login Attempted", { type: "info" });
       })
       .addCase(login.fulfilled, (state, action) => {
         let user = action.payload;
@@ -45,9 +49,11 @@ const slice = createSlice({
 
         // get return url from location state or default to home page
         history.navigate('/');
+        toast("Login Successful!", { type: "success" });
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
 
     // Register
@@ -59,9 +65,11 @@ const slice = createSlice({
         // get return url from location state or default to home page
         const { from } = history.location.state || { from: { pathname: '/login' } };
         history.navigate(from);
+        toast("Register Successful!", { type: "success" });
       })
       .addCase(register.rejected, (state, action) => {
         state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
 
     // Refresh Auth Tokens
@@ -103,6 +111,7 @@ const refreshToken = createAsyncThunk(
 );
 
 
-export default slice.reducer;
 
+// ACTUAL EXPORTS
 export const authActions = { ...slice.actions, login, register, refreshToken };
+export default slice.reducer;

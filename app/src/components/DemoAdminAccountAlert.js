@@ -1,10 +1,14 @@
 
 export function DemoAdminAccountAlert(props) {
-    return (
-        <div className="alert alert-info mt-5">
-            <h3>Demo Admin Account:</h3>
-            <p>Email: {props.email}<br />
-                Password: {props.password}</p>
-        </div>
-    )
+  return (
+    <div className="alert error">
+      <header>
+        <h3>Demo Admin Account:</h3>
+      </header>
+      <div class='content'>
+        <p>Email: {props.email}</p>
+        <p>Password: {props.password}</p>
+      </div>
+    </div>
+  )
 }

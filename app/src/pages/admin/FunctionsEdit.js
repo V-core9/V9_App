@@ -4,8 +4,8 @@ export { FunctionsEdit };
 
 function FunctionsEdit() {
   return (
-    <div className="myBooks">
+    <section className="myBooks">
       <AppFunctionsEditForm />
-    </div>
+    </section>
   );
 }

@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 
 import { myBooksActions } from '../store';
 
+import { NavItem } from '../components';
 const { editBook, updateBook } = myBooksActions;
 
 export { BookEditForm };
@@ -73,7 +74,7 @@ function BookEditForm() {
       </section>
       <footer>
         <button disabled={isSubmitting} className="success">{isSubmitting && <span className='info'>🚀 LOADING...</span>}✅ Update</button>
-        <button className="warning" onClick={() => dispatch(editBook({ id: null }))}>✖ Close</button>
+        <NavItem className="warning button" to='/my-books' icon="✖" text="Cancel" />
       </footer>
     </form>
   )
