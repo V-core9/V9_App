@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchWrapper } from '../helpers';
+import { toast } from 'react-toastify';
 
+import { fetchWrapper } from '../helpers';
 
 const initialState = {
   appFunctions: [],
   status: 'idle',
   newFormShow: false,
-  editing: null
 };
 
 export const getAll = createAsyncThunk(
@@ -33,12 +33,6 @@ export const appFunctionsSlice = createSlice({
   name: 'appFunctions',
   initialState,
   reducers: {
-    endEditFunction: (state) => {
-      state.editing = null;
-    },
-    editFunction: (state, action) => {
-      state.editing = action.payload;
-    },
     toggleNewForm: (state) => {
       state.newFormShow = !state.newFormShow;
     }
@@ -64,6 +58,12 @@ export const appFunctionsSlice = createSlice({
         state.status = 'idle';
         console.log('createNew', action.payload);
         state.appFunctions.push(action.payload);
+        toast("Function Created Successfully.", { type: "success" });
+        return action.payload;
+      })
+      .addCase(createNew.rejected, (state, action) => {
+        state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
 
     builder
@@ -89,6 +89,12 @@ export const appFunctionsSlice = createSlice({
         let newFunctions = [];
         state.appFunctions.map(item => newFunctions.push((item.id === action.payload.id) ? action.payload : item));
         state.appFunctions = newFunctions;
+
+        toast("Function Updated Successfully.", { type: "success" });
+      })
+      .addCase(updateFunction.rejected, (state, action) => {
+        state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
 
   },

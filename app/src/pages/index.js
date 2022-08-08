@@ -22,6 +22,9 @@ export * from './admin/Users';
 export * from './admin/UsersNew';
 export * from './admin/Functions';
 export * from './admin/FunctionsEdit';
+export * from './admin/FunctionsNew';
+
+export * from './admin/AdminAppInfo';
 
 // System Pages
 export * from './system/PageNotFound';

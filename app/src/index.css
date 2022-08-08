@@ -33,6 +33,11 @@ button:hover {
   transition: all .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .info {
   background: rgba(100, 120, 255, 0.15);
 }
@@ -226,7 +231,7 @@ li.list-group-item small {
 }
 
 header {
-  /* background: transparent; */
+  background: #2d3841;
   padding: .5em;
   clip-path: polygon(0% 9px, 9px 0%, calc(100% - 9px) 0%, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0% calc(100% - 9px));
 }
@@ -1032,4 +1037,43 @@ nav.isPC.shown>section a icon {
 
 .monaco-editor {
   min-height: 500px !important;
+}
+
+
+
+
+.content section>div {}
+
+
+.content section>div form_group p {
+  margin: 0;
+  padding: 0 1em;
+}
+
+.content section>div form_group {
+  align-items: center;
+  color: #a7a7a7;
+}
+
+
+.content section>div>.warning p {
+  margin: 0;
+}
+
+.content section>div>.warning {
+  display: flex;
+  gap: 1em;
+  font-size: 12px;
+  padding: 0;
+  align-items: center;
+}
+
+.content section>div>.warning icon {
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: orange;
+  width: 2em;
+  background: #ffffff36;
 }

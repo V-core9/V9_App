@@ -25,7 +25,9 @@ import {
   Users,
   UsersNew,
   Functions,
+  FunctionsNew,
   FunctionsEdit,
+  AdminAppInfo,
   // NASA Thing
   SearchPage,
   AssetViewPage,
@@ -77,8 +79,10 @@ function AppRoutes() {
 
 
       <Route path="/functions" element={<PrivateRoute><AdminRoute> <Functions /> </AdminRoute></PrivateRoute>} />
+      <Route path="/functions/new" element={<PrivateRoute><AdminRoute> <FunctionsNew /> </AdminRoute></PrivateRoute>} />
       <Route path="/functions/:func_id" element={<PrivateRoute><AdminRoute> <FunctionsEdit /> </AdminRoute></PrivateRoute>} />
 
+      <Route path="/admin-app-info" element={<PrivateRoute><AdminRoute><AdminAppInfo /></AdminRoute></PrivateRoute>} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

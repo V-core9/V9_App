@@ -36,22 +36,26 @@ function Nav() {
         <NavItem to="/redux-counter" text="Redux Counter" icon="🔄" />
         <NavItem to="/nasa-assets" text="NASA Assets" icon="🔎" />
       </section>
-      {(!!authUser) && <section className="success">
+      {!!authUser && <section className="success">
         <h4><icon>🚀</icon><span>Application</span></h4>
         <NavItem to="/books" text="Books" icon="📚" />
         <NavItem to="/my-books" text="My Books" icon="📑" />
       </section>}
-      {(isAdmin) && <section className="warning">
+      {isAdmin && <section className="info">
         <h4><icon>👷‍♂️</icon><span>Administration</span></h4>
         <NavItem to="/dashboard" text="Dashboard" icon="👨‍💻" />
         <NavItem to="/users" text="Users" icon="👥" />
       </section>}
-      {(isAdmin) && <section className="error">
+      {isAdmin && <section className="warning">
         <h4><icon>🚩</icon><span>Experimental</span></h4>
         <NavItem to="/functions" text="Functions" icon="➰" />
+        <NavItem to="/admin-app-info" text="Application Info" icon="📑" />
+      </section>}
+      {isAdmin && <section className="error">
+        <h4><icon>👷‍♂️</icon><span>Demos & Errors</span></h4>
         <NavItem to="/error-404" text="404 Error" icon="🔻" />
       </section>}
-      <section className="info">
+      <section className="">
         <h4><icon>👥</icon><span>Account</span></h4>
         {(!authUser) && <NavItem title="Login" to="/login" text="Login" icon="🚏" />}
         {(!authUser) && <NavItem title="Register" to="/register" text="Register" icon="🚀" />}

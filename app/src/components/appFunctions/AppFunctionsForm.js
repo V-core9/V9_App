@@ -1,96 +1,90 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { useParams } from 'react-router-dom';
+import Editor from "@monaco-editor/react";
+import { useNavigate } from 'react-router-dom';
+
+import { fetchWrapper } from '../../helpers';
 import { appFunctionsActions } from '../../store';
 
-const { toggleNewForm, createNew, endEditFunction, updateFunction } = appFunctionsActions;
+import { NavItem } from '../../components';
+
+const { createNew } = appFunctionsActions;
 
 export { AppFunctionsForm };
 
 function AppFunctionsForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { appFunctions, newFormShow, editing } = useSelector(x => x.appFunctions);
-
-  const isEditing = (editing !== null);
-
-  let func;
-
-  appFunctions.map(item => (item.id === editing) ? func = item : null);
-
-
-  const [name, setName] = useState(func?.name || '');
-  const [description, setDescription] = useState(func?.description || '');
-  const [content, setContent] = useState(func?.content || '');
-
-  const resetInputs = () => {
-    setName('');
-    setDescription('');
-    setContent('');
-  }
-
-  // form validation rules
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Function Name is required'),
-    content: Yup.string().required('Function Content is required')
-  });
-
-  const formOptions = { resolver: yupResolver(validationSchema) };
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [content, setContent] = useState('');
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState } = useForm();
   const { errors, isSubmitting } = formState;
 
-  function onSubmit({ }) {
-    if (isEditing) {
-      dispatch(updateFunction({ id: editing, name, content, description }));
-      resetInputs();
-      return dispatch(endEditFunction());
-    } else {
-      dispatch(createNew({ name, content, description }));
-      resetInputs();
-      return dispatch(toggleNewForm());
+  async function onSubmit() {
+    let newFunc = await dispatch(createNew({ name, content, description }));
+
+    console.log(newFunc);
+    if (newFunc.id !== undefined) {
+      navigate("/functions/" + newFunc.id);
     }
   }
 
   return (
-    <div className="card">
+    <div >
       <form onSubmit={handleSubmit(onSubmit)}>
-        {!isEditing && <h4 className="card-header">New AppFunction Form</h4>}
-        {isEditing && <h4 className="card-header">Edit AppFunction Form</h4>}
-        <div className="card-body">
+
+        <header>
+          <h2>New AppFunction Form</h2>
+          <div className='flex-inline'>
+            <button disabled={isSubmitting} className="success">
+              {isSubmitting && <span className>SAVING...</span>}
+              🚀 Save
+            </button>
+            <NavItem className="error button" to='/functions' icon="✖" text="Cancel" />
+          </div>
+        </header>
+
+        <section >
+
           <form_group>
-            <label>Name</label>
-            {!isEditing && <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} />}
-            {isEditing && <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} value={name} onChange={(e) => setName(e.target.value)} />}
+            <div>
+              <label>Name</label>
+              <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} value={name} onChange={(e) => setName(e.target.value)} />
+            </div>
             <div className="invalid-feedback">{errors.name?.message}</div>
           </form_group>
+
           <form_group>
-            <label>Description</label>
-            {!isEditing && <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} />}
-            {isEditing && <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} value={description} onChange={(e) => setDescription(e.target.value)} />}
+            <div>
+              <label>Description</label>
+              <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} value={description} onChange={(e) => setDescription(e.target.value)} />
+            </div>
             <div className="invalid-feedback">{errors.description?.message}</div>
           </form_group>
-          <form_group>
-            <label>Content</label>
-            {!isEditing && <textarea name="content" type="text" {...register('content')} className={`form-control ${errors.content ? 'is-invalid' : ''}`} />}
-            {isEditing && <textarea name="content" type="text" {...register('content')} className={`form-control ${errors.content ? 'is-invalid' : ''}`} value={content} onChange={(e) => setContent(e.target.value)} />}
 
-            <div className="invalid-feedback">{errors.content?.message}</div>
-          </form_group>
-        </div>
-        <div className="card-footer">
-          <button disabled={isSubmitting} className="btn btn-primary">
-            {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-            {!isEditing && '🚀 Create'}
-            {isEditing && '🚀 Save'}
-          </button>
-          {!isEditing && <button type="button" className="btn btn-secondary" onClick={() => dispatch(toggleNewForm())}>❌ Close</button>}
-          {isEditing && <button type="button" className="btn btn-secondary" onClick={() => dispatch(endEditFunction())}>❌ Close</button>}
-        </div>
+          <header>
+            <h4>Script Code</h4>
+          </header>
+          <Editor
+            height="90vh"
+            defaultLanguage="javascript"
+            theme="vs-dark"
+            defaultValue={content}
+            onChange={setContent}
+          />
+          <div className="invalid-feedback">{errors.content?.message}</div>
+
+        </section>
+
       </form>
     </div>
   )
