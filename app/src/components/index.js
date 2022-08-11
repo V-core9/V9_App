@@ -7,6 +7,8 @@ export * from './Footer';
 
 export * from './FormLogin';
 
+export * from './Accordion/Accordion';
+
 // APPLICATION
 export * from './PrivateRoute';
 

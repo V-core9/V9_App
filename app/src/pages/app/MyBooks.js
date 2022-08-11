@@ -21,18 +21,18 @@ function MyBooks() {
   }, []);
 
   return (
-    <div className="myBooks">
+    <section className="myBooks">
       <header>
         <h1>{user?.username} Books:</h1>
         <NavItem to="/my-books/new" text="Create New" icon="➕" className='button' />
       </header>
-      <ul className="list-group">
+      <section>
         {myBooks.myBooks?.map(book =>
           <BooksListItem book={book} />
         )}
-      </ul>
+      </section>
       {myBooks.loading && <div className="spinner-border spinner-border-sm"></div>}
       {myBooks.error && <div className="text-danger">Error loading MyBooks: {myBooks.error.message}</div>}
-    </div>
+    </section>
   );
 }

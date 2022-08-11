@@ -1,5 +1,9 @@
 import { Routes, Route, Navigate, useNavigate, useLocation, BrowserRouter as Router } from 'react-router-dom';
 
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { history } from './helpers';
 import { Nav, Header, Footer, PrivateRoute, AdminRoute } from './components';
 import {
@@ -19,11 +23,16 @@ import {
   // Admin Pages
   Dashboard,
   Users,
+  UsersNew,
   Functions,
+  FunctionsNew,
   FunctionsEdit,
+  AdminAppInfo,
   // NASA Thing
   SearchPage,
   AssetViewPage,
+  // Demos
+  ComponentsExample,
 } from './pages';
 
 function App() {
@@ -36,6 +45,7 @@ function App() {
           <AppRoutes />
         </div>
       </div>
+      <ToastContainer position="bottom-right" theme="dark" autoClose={5000} hideProgressBar={false} newestOnTop={true} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </Router>
   )
 }
@@ -64,10 +74,18 @@ function AppRoutes() {
 
 
       <Route path="/dashboard" element={<PrivateRoute><AdminRoute><Dashboard /></AdminRoute></PrivateRoute>} />
+
       <Route path="/users" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
+      <Route path="/users/new" element={<PrivateRoute><AdminRoute><UsersNew /></AdminRoute></PrivateRoute>} />
+      <Route path="/users/edit/:user_id" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
+
+
       <Route path="/functions" element={<PrivateRoute><AdminRoute> <Functions /> </AdminRoute></PrivateRoute>} />
+      <Route path="/functions/new" element={<PrivateRoute><AdminRoute> <FunctionsNew /> </AdminRoute></PrivateRoute>} />
       <Route path="/functions/:func_id" element={<PrivateRoute><AdminRoute> <FunctionsEdit /> </AdminRoute></PrivateRoute>} />
 
+      <Route path="/admin-app-info" element={<PrivateRoute><AdminRoute><AdminAppInfo /></AdminRoute></PrivateRoute>} />
+      <Route path="/components-examples" element={<PrivateRoute><AdminRoute><ComponentsExample /></AdminRoute></PrivateRoute>} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

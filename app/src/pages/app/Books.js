@@ -17,7 +17,7 @@ function Books() {
   }, []);
 
   return (
-    <div className="books">
+    <section className="books">
       <h3>Public Books Listing:</h3>
       {books.length &&
         <ul className="list-group">
@@ -28,6 +28,6 @@ function Books() {
       }
       {books.loading && <div className="spinner-border spinner-border-sm"></div>}
       {books.error && <div className="text-danger">Error loading books: {books.error.message}</div>}
-    </div>
+    </section>
   );
 }

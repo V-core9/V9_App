@@ -4,6 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 import { NavItem } from './Nav/NavItem'
 import { myBooksActions } from '../store';
@@ -17,11 +20,11 @@ function BookNewForm() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
+  const [content, setContent] = useState({});
   // form validation rules
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required'),
     description: Yup.string().required('Email is required'),
-    content: Yup.string().required('Password is required')
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -29,16 +32,16 @@ function BookNewForm() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors, isSubmitting } = formState;
 
-  function onSubmit({ title, description, content }) {
+  function onSubmit({ title, description }) {
     dispatch(newBook({ title, description, content }));
     title = '';
     description = '';
-    content = '';
+    setContent('');
     navigate("/my-books");
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className='new-book-form' onSubmit={handleSubmit(onSubmit)}>
       <header>
         <h4>New Book Form</h4>
       </header>
@@ -53,9 +56,10 @@ function BookNewForm() {
           <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} />
           <div className="invalid-feedback">{errors.description?.message}</div>
         </form_group>
-        <form_group>
+        <form_group style={{ flex: 1 }}>
           <label>Content</label>
-          <textarea name="content" type="text" {...register('content')} className={`form-control ${errors.content ? 'is-invalid' : ''}`} />
+          <ReactQuill theme="snow" value={content} onChange={setContent} />
+          <textarea value={content} />
           <div className="invalid-feedback">{errors.content?.message}</div>
         </form_group>
       </section>

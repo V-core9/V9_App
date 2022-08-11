@@ -38,36 +38,30 @@ function Register() {
   }
 
   return (
-    <div className="content col-md-6 offset-md-3 mt-5">
-      <div className="card">
-        <h4 className="card-header">Register</h4>
-        <div className="card-body">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <form_group>
-              <label>Username</label>
-              <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
-              <div className="invalid-feedback">{errors.username?.message}</div>
-            </form_group>
-            <form_group>
-              <label>Email</label>
-              <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
-              <div className="invalid-feedback">{errors.email?.message}</div>
-            </form_group>
-            <form_group>
-              <label>Password</label>
-              <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-              <div className="invalid-feedback">{errors.password?.message}</div>
-            </form_group>
-            <button disabled={isSubmitting} className="btn btn-primary">
-              {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-              Register
-            </button>
-            {authError &&
-              <div className="alert alert-danger mt-3 mb-0">{authError.message}</div>
-            }
-          </form>
-        </div>
-      </div>
-    </div>
+    <form className='public-register' onSubmit={handleSubmit(onSubmit)}>
+      <header>Register</header>
+      <form_group>
+        <label>Username</label>
+        <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+        <div className="invalid-feedback">{errors.username?.message}</div>
+      </form_group>
+      <form_group>
+        <label>Email</label>
+        <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+        <div className="invalid-feedback">{errors.email?.message}</div>
+      </form_group>
+      <form_group>
+        <label>Password</label>
+        <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
+        <div className="invalid-feedback">{errors.password?.message}</div>
+      </form_group>
+      <button disabled={isSubmitting} className="success">
+        {isSubmitting && <span>LOADING...</span>}
+        Register
+      </button>
+      {authError &&
+        <div className="error">{authError.message}</div>
+      }
+    </form>
   )
 }

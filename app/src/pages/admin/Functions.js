@@ -17,11 +17,11 @@ function Functions() {
   }, []);
 
   return (
-    <div className="appFunctions">
+    <section className="appFunctions">
       <header>
         <h2>Better System Functions:</h2>
         <div>
-          <button onClick={() => dispatch(appFunctionsActions.toggleNewForm())}>Create New ➕</button>
+          <NavItem className='button' to='/functions/new' text='Create New' icon='➕' />
         </div>
       </header>
       <section>
@@ -43,6 +43,6 @@ function Functions() {
       <footer>
         <p>PAGINATION SPACE</p>
       </footer>
-    </div >
+    </section >
   );
 }

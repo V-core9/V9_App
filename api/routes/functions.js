@@ -135,7 +135,7 @@ router.get('/:id', async (req, res, next) => {
  *               $ref: '#/components/schemas/Function'
 */
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
   try {
     req.body.authorId = req.payload.userId;
     req.body.name = req.body.name.replaceAll(' ', '-');

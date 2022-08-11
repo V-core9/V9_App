@@ -1,24 +1,22 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { NavItem } from './index';
 import { myBooksActions } from '../store';
 
-export function BooksListItem(props) {
-  const { book } = props;
+export function BooksListItem({ book }) {
   const dispatch = useDispatch();
 
   return (
-    <li className="list-group-item" key={book.id}>
-      <div className="d-flex w-100 justify-content-between">
-        <h5 className="mb-1">{book.title}</h5>
-        <small>
-          <NavItem to={`/my-books/edit/${book.id}`} icon="🎨" text='Edit' />
-          <button className="btn-danger" onClick={() => dispatch(myBooksActions.deleteBook(book.id))} title="Delete Book">❌ Delete</button>
-        </small>
+    <div className="books-list-item">
+      <div className="details">
+        <h4>Title: <strong>{book.title}</strong></h4>
+        <p>Description: {book.description}</p>
+        <small>ID: {book.id}</small>
       </div>
-      <p className="mb-1">{book.description}</p>
-      <small>ID: {book.id}</small>
-    </li>
+      <div className="options">
+        <NavItem to={`/my-books/edit/${book.id}`} icon="🎨" text='Edit' className="button" />
+        <button className="btn-danger" onClick={() => dispatch(myBooksActions.deleteBook(book.id))} title="Delete Book">❌ Delete</button>
+      </div>
+    </div>
   )
 }

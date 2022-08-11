@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { toast } from 'react-toastify';
 import { fetchWrapper } from '../helpers';
 
 
@@ -46,6 +47,7 @@ const slice = createSlice({
       })
       .addCase(getMyBooks.rejected, (state, action) => {
         state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
 
     builder
@@ -54,9 +56,11 @@ const slice = createSlice({
       })
       .addCase(newBook.fulfilled, (state, action) => {
         state.myBooks.push(action.payload);
+        toast("New Book Created : " + action.payload.id, { type: "success" });
       })
       .addCase(newBook.rejected, (state, action) => {
         state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
 
     builder
@@ -67,9 +71,11 @@ const slice = createSlice({
         const newState = [];
         state.myBooks.map((value) => (value.id !== action.payload.id) ? newState.push(value) : newState.push(action.payload));
         state.myBooks = newState;
+        toast("Book Updated.", { type: "success" });
       })
       .addCase(updateBook.rejected, (state, action) => {
         state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
 
     builder
@@ -80,9 +86,11 @@ const slice = createSlice({
         const newState = [];
         state.myBooks.map((value) => (value.id !== action.payload.id) ? newState.push(value) : null);
         state.myBooks = newState;
+        toast("Deleted a book.", { type: "success" });
       })
       .addCase(deleteBook.rejected, (state, action) => {
         state.error = action.error;
+        toast(state.error.message, { type: "error" });
       });
   }
 });

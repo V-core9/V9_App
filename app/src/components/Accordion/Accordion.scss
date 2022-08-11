@@ -1,0 +1,18 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #2c3439;
+  margin: 0.25em;
+
+  .accordion-header {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 0.5em;
+    background: #2c3439;
+  }
+
+  .accordion-content {
+    padding: 0.5em;
+  }
+}

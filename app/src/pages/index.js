@@ -19,8 +19,13 @@ export * from './app/MyProfile';
 // Admin [Private] Pages
 export * from './admin/Dashboard';
 export * from './admin/Users';
+export * from './admin/UsersNew';
 export * from './admin/Functions';
 export * from './admin/FunctionsEdit';
+export * from './admin/FunctionsNew';
+export * from './admin/ComponentsExample';
+
+export * from './admin/AdminAppInfo';
 
 // System Pages
 export * from './system/PageNotFound';
