@@ -21,7 +21,7 @@ function Functions() {
       <header>
         <h2>Better System Functions:</h2>
         <div>
-          <button onClick={() => dispatch(appFunctionsActions.toggleNewForm())}>Create New ➕</button>
+          <NavItem className='button' to='/functions/new' text='Create New' icon='➕' />
         </div>
       </header>
       <section>

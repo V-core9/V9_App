@@ -23,7 +23,7 @@ function AdminAppInfo() {
       </header>
       <section>
 
-        <Accordion title='Authentication' content={
+        <Accordion title='🔑 Authentication Info' content={
           <>
             <form_group>
               <label>User ID</label>
@@ -67,7 +67,7 @@ function AdminAppInfo() {
           </>
         } />
 
-        <Accordion title='Authentication' content={
+        <Accordion title='🌌 Environment Variables' content={
           <>
             <div>
               {

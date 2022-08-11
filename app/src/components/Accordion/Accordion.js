@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Accordion.scss';
 
-function Accordion({ title, content }) {
-  const [isActive, setIsActive] = useState(false);
+function Accordion({ title, content, startOpen }) {
+  const [isActive, setIsActive] = useState(typeof startOpen === 'boolean' ? startOpen : false);
 
   return (
     <div className="accordion">

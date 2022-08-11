@@ -15,7 +15,7 @@ function ComponentsExample() {
       <header>
         <h3>Demo Components</h3>
       </header>
-      <Accordion title='Root Accordion Component' content={
+      <Accordion title='Root Accordion Component' startOpen={true} content={
         <>
           <Accordion title='Empty Accordion' />
           <Accordion title='Text Content Accordion' content='Demo Content Spaceholder.' />
