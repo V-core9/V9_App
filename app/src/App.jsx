@@ -31,6 +31,8 @@ import {
   // NASA Thing
   SearchPage,
   AssetViewPage,
+  // Demos
+  ComponentsExample,
 } from './pages';
 
 function App() {
@@ -83,6 +85,7 @@ function AppRoutes() {
       <Route path="/functions/:func_id" element={<PrivateRoute><AdminRoute> <FunctionsEdit /> </AdminRoute></PrivateRoute>} />
 
       <Route path="/admin-app-info" element={<PrivateRoute><AdminRoute><AdminAppInfo /></AdminRoute></PrivateRoute>} />
+      <Route path="/components-examples" element={<PrivateRoute><AdminRoute><ComponentsExample /></AdminRoute></PrivateRoute>} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

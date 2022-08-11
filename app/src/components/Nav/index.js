@@ -52,7 +52,8 @@ function Nav() {
         <NavItem to="/admin-app-info" text="Application Info" icon="📑" />
       </section>}
       {isAdmin && <section className="error">
-        <h4><icon>👷‍♂️</icon><span>Demos & Errors</span></h4>
+        <h4><icon>👷‍♂️</icon><span>Demos Pages</span></h4>
+        <NavItem to="/components-examples" text="Components" icon="🤦‍♂️" />
         <NavItem to="/error-404" text="404 Error" icon="🔻" />
       </section>}
       <section className="">

@@ -23,6 +23,7 @@ export * from './admin/UsersNew';
 export * from './admin/Functions';
 export * from './admin/FunctionsEdit';
 export * from './admin/FunctionsNew';
+export * from './admin/ComponentsExample';
 
 export * from './admin/AdminAppInfo';
 

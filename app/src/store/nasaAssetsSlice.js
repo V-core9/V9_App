@@ -53,8 +53,12 @@ export const nasaAssetsSlice = createSlice({
     },
     setYearEnd: (state, action) => {
       console.log('setYearEnd', action.payload);
-      const value = (action.payload === '') ? null : Number(action.payload);
-      if ((Number.isInteger(value) && value <= (new Date()).getFullYear() && value > (state.search.yearStart === null ? 0 : state.search.yearStart)) || value === null) state.search.yearEnd = value;
+      try {
+        const value = (action.payload === '') ? null : Number(action.payload);
+        if ((Number.isInteger(value) && value <= (new Date()).getFullYear() && value > (state.search.yearStart === null ? 0 : state.search.yearStart)) || value === null) state.search.yearEnd = value;
+      } catch (e) {
+        console.log(e);
+      }
     },
     resetYearEnd: (state) => {
       state.search.yearEnd = null;

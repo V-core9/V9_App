@@ -16,6 +16,7 @@ function SearchListFiler() {
   const submittinForm = (e) => {
     e.preventDefault();
     dispatch(startNewSearch());
+    if (advancedFiltersStatus === true) setAdvancedFiltersStatus(false);
   };
 
   const isMediaAudio = (search.media_type.indexOf('audio') !== -1);
@@ -77,7 +78,7 @@ function SearchListFiler() {
 
             <form_group>
               <label for='search_end_year'>End Year</label>
-              <input type="text" id='search_end_year' value={search.yearEnd} onChange={(e) => dispatch(setYearEnd(e.target.value))} />
+              <input type="text" id='search_end_year' value={search.yearEnd !== null ? search.yearEnd : ''} onChange={(e) => dispatch(setYearEnd(e.target.value))} />
               <action className={`${(search.yearEnd !== null) ? 'visible' : 'hidden'} inputReset`} onClick={(e) => dispatch(resetYearEnd())} title="Reset Input Field.">X</action>
             </form_group>
           </section>
