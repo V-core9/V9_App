@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { NavItem } from './index';
 import { myBooksActions } from '../store';
 
-export function BooksListItem(props) {
-  const { book } = props;
+export function BooksListItem({ book }) {
   const dispatch = useDispatch();
 
   return (

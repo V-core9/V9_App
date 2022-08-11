@@ -2,32 +2,12 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import { Accordion } from '../../components';
+
 
 export { AdminAppInfo };
 
 
-const EnvContainer = (
-  <div className='env' >
-    <header>
-      <h3>Environment</h3>
-    </header>
-    <div>
-      {
-        Object.keys(process.env).map((key) => {
-          return (
-            <form_group>
-              <label>{key}</label>
-              <p>{process.env[key]}</p>
-            </form_group>
-          )
-        })
-      }
-    </div>
-    <div className="warning">
-      <icon>⚠</icon> <p>These only get loaded when server is in dev mode or when building. Restart your host or rebuild the application to get updated values.</p>
-    </div>
-  </div >
-)
 
 
 function AdminAppInfo() {
@@ -43,11 +23,8 @@ function AdminAppInfo() {
       </header>
       <section>
 
-        <div className='authContainer' >
-          <header>
-            <h3>Authentication</h3>
-          </header>
-          <div>
+        <Accordion title='Authentication' content={
+          <>
             <form_group>
               <label>User ID</label>
               <p>{JSON.stringify(user.userId)}</p>
@@ -87,10 +64,28 @@ function AdminAppInfo() {
               <label>refreshToken</label>
               <p>{JSON.stringify(user.refreshToken)}</p>
             </form_group>
-          </div>
-        </div >
+          </>
+        } />
 
-        {EnvContainer}
+        <Accordion title='Authentication' content={
+          <>
+            <div>
+              {
+                Object.keys(process.env).map((key) => {
+                  return (
+                    <form_group>
+                      <label>{key}</label>
+                      <p>{process.env[key]}</p>
+                    </form_group>
+                  )
+                })
+              }
+            </div>
+            <div className="warning">
+              <icon>⚠</icon> <p>These only get loaded when server is in dev mode or when building. Restart your host or rebuild the application to get updated values.</p>
+            </div>
+          </>
+        } />
 
       </section>
     </section>
