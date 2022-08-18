@@ -1042,12 +1042,17 @@ nav.isPC.shown>section a icon {
 
 
 
-.content section>div {}
-
-
 .content section>div form_group p {
   margin: 0;
   padding: 0 1em;
+  white-space: pre;
+  color: white;
+  overflow: auto;
+  flex: 1;
+}
+
+.content section>div form_group>label {
+  align-self: stretch;
 }
 
 .content section>div form_group {

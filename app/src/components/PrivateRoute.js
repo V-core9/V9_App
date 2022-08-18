@@ -5,14 +5,13 @@ import { history } from '../helpers';
 
 export { PrivateRoute };
 
-function PrivateRoute({ children }) {
-    const { user: authUser } = useSelector(x => x.auth);
+function PrivateRoute({ children, adminRoute }) {
+  const { user } = useSelector(x => x.auth);
 
-    if (!authUser) {
-        // not logged in so redirect to login page with the return url
-        return <Navigate to="/login" state={{ from: history.location }} />
-    }
+  if (!user) return <Navigate to="/login" state={{ from: history.location }} />
 
-    // authorized so return child components
-    return children;
+  if ((!!adminRoute) && (!user.isAdmin)) return <Navigate to="/" state={{ from: history.location }} />
+
+  // authorized so return child components
+  return children;
 }

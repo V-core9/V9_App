@@ -50,10 +50,13 @@ const router = require('express').Router();
  *                   items:
  *                     $ref: '#/components/schemas/Bookmark'
 */
-router.get('/', function (req, res, next) {
-  res.send('GETTING LIST OF BOOKMARKS');
+router.get('/', (req, res, next) => {
+  try {
+    res.send('GETTING LIST OF BOOKMARKS');
+  } catch (err) {
+    res.send(JSON.stringify(err));
+  }
 });
-
 
 /**
  * @swagger
@@ -82,8 +85,12 @@ router.get('/', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/Bookmark'
 */
-router.get('/:id', function (req, res, next) {
-  res.send('I WILL GET BOOKMARK BY ID:' + req.params.id);
+router.get('/:id', (req, res, next) => {
+  try {
+    res.send(`I WILL GET BOOKMARK BY ID: ${req.params.id}`);
+  } catch (err) {
+    res.send(JSON.stringify(err));
+  }
 });
 
 /**
@@ -106,7 +113,7 @@ router.get('/:id', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/Bookmark'
 */
-router.post('/', function (req, res, next) {
+router.post('/', (req, res, next) => {
   res.send('I WILL CREATE NEW BOOKMARK');
 });
 /**
@@ -129,7 +136,7 @@ router.post('/', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/Bookmark'
 */
-router.put('/', function (req, res, next) {
+router.put('/', (req, res, next) => {
   res.send('I WILL UPDATE BOOKMARK');
 });
 
@@ -153,7 +160,7 @@ router.put('/', function (req, res, next) {
  *                   items:
  *                     $ref: '#/components/schemas/Bookmark'
 */
-router.delete('/', function (req, res, next) {
+router.delete('/', (req, res, next) => {
   res.send('I WILL DELETE BOOKMARK');
 });
 

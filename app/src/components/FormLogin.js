@@ -22,11 +22,12 @@ export function FormLogin() {
   }, []);
 
   // form validation rules
-  const validationSchema = Yup.object().shape({
+  const loginSchema = Yup.object().shape({
     email: Yup.string().required('Email is required'),
     password: Yup.string().required('Password is required')
   });
-  const formOptions = { resolver: yupResolver(validationSchema) };
+
+  const formOptions = { resolver: yupResolver(loginSchema) };
 
   // get functions to build form with useForm() hook
   const { register, handleSubmit, formState } = useForm(formOptions);
@@ -35,6 +36,7 @@ export function FormLogin() {
   function onSubmit({ email, password }) {
     return dispatch(authActions.login({ email, password }));
   }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <header>Login</header>

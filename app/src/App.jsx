@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { history } from './helpers';
-import { Nav, Header, Footer, PrivateRoute, AdminRoute } from './components';
+import { Nav, Header, Footer, PrivateRoute } from './components';
 import {
   // Public pages
   Home,
@@ -73,19 +73,19 @@ function AppRoutes() {
       <Route path="/my-profile" element={<PrivateRoute><MyProfile /></PrivateRoute>} />
 
 
-      <Route path="/dashboard" element={<PrivateRoute><AdminRoute><Dashboard /></AdminRoute></PrivateRoute>} />
+      <Route path="/dashboard" element={<PrivateRoute adminRoute={true}><Dashboard /></PrivateRoute>} />
 
-      <Route path="/users" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
-      <Route path="/users/new" element={<PrivateRoute><AdminRoute><UsersNew /></AdminRoute></PrivateRoute>} />
-      <Route path="/users/edit/:user_id" element={<PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>} />
+      <Route path="/users" element={<PrivateRoute adminRoute={true}><Users /></PrivateRoute>} />
+      <Route path="/users/new" element={<PrivateRoute adminRoute={true}><UsersNew /></PrivateRoute>} />
+      <Route path="/users/edit/:user_id" element={<PrivateRoute adminRoute={true}><Users /></PrivateRoute>} />
 
 
-      <Route path="/functions" element={<PrivateRoute><AdminRoute> <Functions /> </AdminRoute></PrivateRoute>} />
-      <Route path="/functions/new" element={<PrivateRoute><AdminRoute> <FunctionsNew /> </AdminRoute></PrivateRoute>} />
-      <Route path="/functions/:func_id" element={<PrivateRoute><AdminRoute> <FunctionsEdit /> </AdminRoute></PrivateRoute>} />
+      <Route path="/functions" element={<PrivateRoute adminRoute={true}><Functions /> </PrivateRoute>} />
+      <Route path="/functions/new" element={<PrivateRoute adminRoute={true}><FunctionsNew /> </PrivateRoute>} />
+      <Route path="/functions/:func_id" element={<PrivateRoute adminRoute={true}><FunctionsEdit /> </PrivateRoute>} />
 
-      <Route path="/admin-app-info" element={<PrivateRoute><AdminRoute><AdminAppInfo /></AdminRoute></PrivateRoute>} />
-      <Route path="/components-examples" element={<PrivateRoute><AdminRoute><ComponentsExample /></AdminRoute></PrivateRoute>} />
+      <Route path="/admin-app-info" element={<PrivateRoute adminRoute={true}><AdminAppInfo /></PrivateRoute>} />
+      <Route path="/components-examples" element={<PrivateRoute adminRoute={true}><ComponentsExample /></PrivateRoute>} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

@@ -108,9 +108,9 @@ router.get('/me', isAuthenticated, async (req, res, next) => {
  *                   items:
  *                     $ref: '#/components/schemas/Book'
 */
-router.get('/', isAuthenticated, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    res.json(await listBooks());
+    res.json(await listBooks(req.query || {}));
   } catch (err) {
     next(err);
   }

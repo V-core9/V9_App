@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Accordion } from '../../components';
+import { Accordion, FormGroup } from '../../components';
 
 
 export { AdminAppInfo };
@@ -14,7 +14,21 @@ function AdminAppInfo() {
 
   const user = useSelector(x => x.auth.user);
 
+  console.log(React);
 
+  let reactSIDNUOYWBF = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+
+  console.log(reactSIDNUOYWBF);
+
+  Object.keys(reactSIDNUOYWBF).map(item => {
+    if (typeof reactSIDNUOYWBF[item] === 'object') {
+      Object.keys(reactSIDNUOYWBF[item]).map(yes => {
+        console.log(`${item}.${yes}`, reactSIDNUOYWBF[item][yes]);
+      })
+    } else {
+      console.log(item, reactSIDNUOYWBF[item]);
+    }
+  })
 
   return (
     <section>
@@ -86,6 +100,31 @@ function AdminAppInfo() {
             </div>
           </>
         } />
+
+        <Accordion
+          title="React App Info"
+          content={
+            <>
+              <h2>ReactDOM Object Keys</h2>
+              {
+                Object.keys(React).map((i) => {
+                  return (
+                    <FormGroup
+                      label={i + ' ' + typeof React[i]}
+                      elements={
+                        <>
+                          {typeof React[i] === 'function' && <p>{React[i].toString()}</p>}
+                          {typeof React[i] === 'object' && <p>{Object.keys(React[i])}</p>}
+                          {typeof React[i] !== 'function' && typeof React[i] !== 'object' && <p>{React[i]}</p>}
+                        </>
+                      }
+                    />
+                  )
+                })
+              }
+            </>
+          }
+        />
 
       </section>
     </section>

@@ -23,8 +23,14 @@ function findBookById(id) {
   });
 }
 
-function listBooks() {
-  return db.book.findMany();
+function listBooks(query = {}) {
+  return db.book.findMany({
+    where: {
+      title: {
+        contains: query.q || undefined
+      },
+    }
+  });
 }
 
 function updateBook(data) {

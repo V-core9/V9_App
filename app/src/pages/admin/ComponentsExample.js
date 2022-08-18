@@ -1,3 +1,4 @@
+
 import {
   Accordion,
   NavItem,
@@ -6,10 +7,26 @@ import {
   BookNewForm
 } from '../../components';
 
+import * as components from '../../components';
+
+const MaybeRenderComponent = ({ name }) => {
+
+  try {
+    return (
+      <>{components[name]()}</>
+    )
+  } catch (error) {
+    return (
+      <>{JSON.stringify(error)}</>
+    )
+  }
+
+}
 
 export { ComponentsExample };
 
 function ComponentsExample() {
+
   return (
     <>
       <header>
@@ -32,9 +49,12 @@ function ComponentsExample() {
           <Accordion title='Counter Component' content={<Counter />} />
         </>
       } />
-      <Accordion title='Navigation Component' content={<Nav />} />
-      <Accordion title='Counter Component' content={<Counter />} />
-      <Accordion title='BookNewForm Component' content={<BookNewForm />} />
+
+      {Object.keys(components).map(component => {
+        return (
+          <Accordion title={component} content={<MaybeRenderComponent name={component} />} />
+        )
+      })}
     </>
   )
 }
