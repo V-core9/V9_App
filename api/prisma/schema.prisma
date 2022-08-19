@@ -45,15 +45,27 @@ model Book {
   Author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
 
+// (Serverless) Application Functions
 model Function {
+  id           String         @id @unique @default(uuid())
+  name         String?        @unique
+  description  String
+  content      String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  authorId     String
+  Author       User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  FunctionTest FunctionTest[]
+}
+
+// Application Function Test Model
+model FunctionTest {
   id          String   @id @unique @default(uuid())
-  name        String?  @unique
   description String
-  content     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  authorId    String
-  Author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  args        String
+  expect      String
+  functionId  String
+  Function    Function @relation(fields: [functionId], references: [id], onDelete: Cascade)
 }
 
 model Bookmark {

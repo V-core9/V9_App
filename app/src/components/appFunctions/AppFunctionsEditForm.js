@@ -10,7 +10,7 @@ import Editor from "@monaco-editor/react";
 import { fetchWrapper } from '../../helpers';
 import { appFunctionsActions } from '../../store';
 
-import { NavItem } from '../../components';
+import { NavItem, Accordion } from '../../components';
 
 const { updateFunction } = appFunctionsActions;
 
@@ -86,17 +86,43 @@ function AppFunctionsEditForm() {
             <div className="invalid-feedback">{errors.description?.message}</div>
           </form_group>
 
-          <header>
-            <h4>Script Code</h4>
-          </header>
-          {content !== '' && <Editor
-            height="90vh"
-            defaultLanguage="javascript"
-            theme="vs-dark"
-            defaultValue={content}
-            onChange={setContent}
-          />}
-          <div className="invalid-feedback">{errors.content?.message}</div>
+          <Accordion
+            title="👨‍💻 Script Code"
+            content={
+              <>
+                <Editor
+                  defaultLanguage="javascript"
+                  theme="vs-dark"
+                  defaultValue={content}
+                  onChange={setContent}
+                />
+                <div className="invalid-feedback">{errors.content?.message}</div>
+              </>
+            }
+          />
+
+          <Accordion
+            title="✅ Tests Listing:"
+            content={
+              <>
+                {
+                  defFunc?.FunctionTest?.map(item => {
+                    console.log(item);
+                    return (
+                      <Accordion
+                        title={item.description}
+                        content={
+                          <>
+                            Function Test Editor Spaceholder!
+                          </>
+                        }
+                      />
+                    )
+                  })
+                }
+              </>
+            }
+          />
 
         </section>
 

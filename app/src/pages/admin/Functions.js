@@ -38,7 +38,7 @@ function Functions() {
           </div>
         )}
         {functions.loading && <div className="spinner-border spinner-border-sm"></div>}
-        {functions.error && <div className="text-danger">Error loading users: {functions.error.message}</div>}
+        {functions.error && <div className="text-danger">Error loading functions: {functions.error.message}</div>}
       </section>
       <footer>
         <p>PAGINATION SPACE</p>

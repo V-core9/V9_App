@@ -33,6 +33,9 @@ function findById(id) {
   return db.function.findUnique({
     where: {
       id,
+    },
+    include: {
+      FunctionTest: true,
     }
   });
 }

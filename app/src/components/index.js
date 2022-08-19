@@ -23,10 +23,7 @@ export * from './PublicBooksListItem';
 
 // ADMIN
 
-//export * from './appFunctions/AppFunctionsEditor';
 export * from './appFunctions/AppFunctionsForm';
-export * from './appFunctions/AppFunctionsNewModal';
-
 export * from './appFunctions/AppFunctionsEditForm';
 
 

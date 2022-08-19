@@ -1,10 +1,15 @@
+const { db } = require('../utils/db');
 const { createUserByEmailAndPassword } = require('../services/users');
 const { createFunc } = require('../services/functions');
+const { createFuncTest } = require('../services/functionTests');
 
 const log = (...args) => console.log(...args);
 
 (async () => {
+  console.log('Prisma Types', Object.keys(db));
+
   const seedAdmin = await createUserByEmailAndPassword({ username: 'SlavkoV', email: 'slavko.vuletic92@gmail.com', password: '0123456789', isAdmin: true });
+
   log('Seed Admin User', seedAdmin);
 
   // Custom Functions
@@ -36,4 +41,15 @@ const log = (...args) => console.log(...args);
   };
 
   log('Seeded AppFunctions', seedFunctions);
+
+  const funcTests = {
+    getPI: await createFuncTest({
+      description: 'Post Empty [args] and get 22/7 float',
+      args: '{}',
+      expect: '22/7',
+      functionId: seedFunctions.getPI.id
+    }),
+  };
+
+  log('Seeded AppFunctionsTests', funcTests);
 })();
