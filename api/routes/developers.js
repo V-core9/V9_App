@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const htmlMinify = require('html-minifier-terser').minify;
 const CleanCSS = require('clean-css');
+const jsMinify = require("terser").minify;
 
-const cleanCss = new CleanCSS({});
+const cssMinify = new CleanCSS({});
 
 const codeMinify = async ({ code = '', language = null }) => {
   console.log('RUNNING: CODE MINIFY', { code, language });
@@ -12,7 +13,7 @@ const codeMinify = async ({ code = '', language = null }) => {
     execTime: Date.now()
   };
 
-  switch (language) {
+  switch (language.toUpperCase()) {
     case 'HTML':
       result.output = await htmlMinify(code, {
         minifyCSS: true,
@@ -21,7 +22,10 @@ const codeMinify = async ({ code = '', language = null }) => {
       });
       break;
     case 'CSS':
-      result.output = cleanCss.minify(code).styles;
+      result.output = cssMinify.minify(code).styles;
+      break;
+    case 'JS':
+      result.output = (await jsMinify(code)).code;
       break;
 
     default:

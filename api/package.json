@@ -32,6 +32,7 @@
     "pug": "2.0.0-beta11",
     "swagger-jsdoc": "5.0.1",
     "swagger-ui-express": "^4.5.0",
+    "terser": "^5.15.0",
     "uuid": "^8.3.2",
     "v_to_sha256": "^1.1.0",
     "x-powered-by-random": "^0.0.4"
