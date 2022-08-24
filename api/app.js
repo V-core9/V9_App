@@ -16,7 +16,7 @@ const usersRouter = require('./routes/users');
 const bookmarksRouter = require('./routes/bookmarks');
 const booksRouter = require('./routes/books');
 const functionsRouter = require('./routes/functions');
-
+const developersRouter = require('./routes/developers');
 
 const app = express();
 
@@ -40,6 +40,7 @@ app.use('/users', usersRouter);
 app.use('/books', booksRouter);
 app.use('/bookmarks', bookmarksRouter);
 app.use('/functions', functionsRouter);
+app.use('/developers', developersRouter);
 
 if (process.env.NODE_ENV === 'development') {
   const swaggerUi = require('swagger-ui-express');

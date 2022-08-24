@@ -8,6 +8,10 @@ export * from './public/ReduxCounter';
 export * from './public/nasa_assets/SearchPage';
 export * from './public/nasa_assets/AssetViewPage';
 
+// FREE TOOLS
+export * from './public/free_tools/FreeTools';
+export * from './public/free_tools/CodeMinifier';
+
 
 // Application [Private] Pages
 export * from './app/Books';

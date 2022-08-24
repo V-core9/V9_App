@@ -49,6 +49,23 @@ function Nav() {
         }
       />
 
+      <Accordion
+        title={
+          <>
+            <NavItem className="flex-inline" to="/free-tools" text="Free Tools" icon="🔬" />
+          </>
+        }
+        onlyToggleIcon={true}
+        startOpen={false}
+        content={
+          <>
+            <NavItem className="flex-inline" to="/free-tools/code-minifier" text="Code Minifier" icon="🔄" />
+            <NavItem className="flex-inline" to="/free-tools/css-minifier" text="CSS Minifier" icon="🔄" />
+            <NavItem className="flex-inline" to="/free-tools/html-minifier" text="HTML Minifier" icon="🔄" />
+          </>
+        }
+      />
+
       {!!authUser && <Accordion
         title={
           <>

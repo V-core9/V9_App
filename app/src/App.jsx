@@ -33,6 +33,9 @@ import {
   AssetViewPage,
   // Demos
   ComponentsExample,
+  // FreeTools,
+  FreeTools,
+  CodeMinifier,
 } from './pages';
 
 function App() {
@@ -63,6 +66,9 @@ function AppRoutes() {
       <Route path="/nasa-assets" element={<SearchPage />} />
       <Route path="/nasa-assets/view/:nasa_id" element={<AssetViewPage />} />
 
+
+      <Route path="/free-tools" element={<FreeTools />} />
+      <Route path="/free-tools/code-minifier" element={<CodeMinifier />} />
 
       <Route path="/books" element={<PrivateRoute><Books /></PrivateRoute>} />
 
