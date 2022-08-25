@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const htmlMinify = require('html-minifier-terser').minify;
 const CleanCSS = require('clean-css');
-const jsMinify = require("terser").minify;
+const jsMinify = require('terser').minify;
+const xmlMinify = require("minify-xml").minify;
 
 const cssMinify = new CleanCSS({});
 
@@ -26,6 +27,9 @@ const codeMinify = async ({ code = '', language = null }) => {
       break;
     case 'JS':
       result.output = (await jsMinify(code)).code;
+      break;
+    case 'XML':
+      result.output = xmlMinify(code, { removeComments: true });
       break;
 
     default:
