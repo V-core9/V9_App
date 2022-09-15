@@ -3,6 +3,7 @@ const htmlMinify = require('html-minifier-terser').minify;
 const CleanCSS = require('clean-css');
 const jsMinify = require('terser').minify;
 const xmlMinify = require("minify-xml").minify;
+const jsonMinify = require("jsonminify");
 
 const cssMinify = new CleanCSS({});
 
@@ -11,7 +12,8 @@ const codeMinify = async ({ code = '', language = null }) => {
 
   const result = {
     output: '',
-    execTime: Date.now()
+    execTime: Date.now(),
+    error: null
   };
 
   switch (language.toUpperCase()) {
@@ -31,9 +33,12 @@ const codeMinify = async ({ code = '', language = null }) => {
     case 'XML':
       result.output = xmlMinify(code, { removeComments: true });
       break;
+    case 'JSON':
+      result.output = jsonMinify(code);
+      break;
 
     default:
-      console.log('Unsupported Language');
+      result.error = 'Unsupported Language';
       break;
   }
 

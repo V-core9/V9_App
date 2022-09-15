@@ -26,6 +26,7 @@
     "html-minifier": "^4.0.0",
     "html-minifier-terser": "^7.0.0",
     "http-errors": "~1.6.3",
+    "jsonminify": "^0.4.2",
     "jsonwebtoken": "^8.5.1",
     "minify-xml": "^3.4.0",
     "morgan": "^1.10.0",
