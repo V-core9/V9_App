@@ -66,6 +66,32 @@ services:
     networks:
       - internal
 
+  next:
+    container_name: ${PROJECT_NAME}_next
+    image: ${NEXT_NODE_IMAGE}
+    restart: unless-stopped
+    command: ${NEXT_START_COMMAND}
+    ports:
+      - ${NEXT_PORT}:${NEXT_DOCKER_PORT}
+    working_dir: /next
+    volumes:
+      - ./next/:/next
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${NEXT_DOCKER_PORT}
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${PROJECT_NAME}_mysql:${MYSQL_PORT}/${MYSQL_DATABASE}
+      CORE_COUNT: ${NEXT_CPUS}
+      CHECKPOINT_DISABLE: 1
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+    depends_on:
+      - mysql
+    mem_limit: 2048m
+    mem_reservation: 256M
+    cpus: ${NEXT_CPUS}
+    networks:
+      - internal
+
   # MySql Database Container
   mysql:
     image: mariadb:${MARIADB_VERSION:-latest}
