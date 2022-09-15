@@ -42,7 +42,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="main_content">
+      <div className="main_content" tabIndex="0" onKeyDown={(e) => console.log('onKeyDown', e)} onKeyUp={(e) => console.log('onKeyUp', e)}>
         <Nav />
         <div className="content">
           <AppRoutes />

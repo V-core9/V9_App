@@ -1,18 +1,22 @@
 const router = require('express').Router();
 const htmlMinify = require('html-minifier-terser').minify;
 const CleanCSS = require('clean-css');
+const jsMinify = require('terser').minify;
+const xmlMinify = require("minify-xml").minify;
+const jsonMinify = require("jsonminify");
 
-const cleanCss = new CleanCSS({});
+const cssMinify = new CleanCSS({});
 
 const codeMinify = async ({ code = '', language = null }) => {
   console.log('RUNNING: CODE MINIFY', { code, language });
 
   const result = {
     output: '',
-    execTime: Date.now()
+    execTime: Date.now(),
+    error: null
   };
 
-  switch (language) {
+  switch (language.toUpperCase()) {
     case 'HTML':
       result.output = await htmlMinify(code, {
         minifyCSS: true,
@@ -21,11 +25,20 @@ const codeMinify = async ({ code = '', language = null }) => {
       });
       break;
     case 'CSS':
-      result.output = cleanCss.minify(code).styles;
+      result.output = cssMinify.minify(code).styles;
+      break;
+    case 'JS':
+      result.output = (await jsMinify(code)).code;
+      break;
+    case 'XML':
+      result.output = xmlMinify(code, { removeComments: true });
+      break;
+    case 'JSON':
+      result.output = jsonMinify(code);
       break;
 
     default:
-      console.log('Unsupported Language');
+      result.error = 'Unsupported Language';
       break;
   }
 
