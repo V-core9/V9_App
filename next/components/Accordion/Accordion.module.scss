@@ -1,0 +1,19 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #2c3439;
+  margin: 0.25em;
+  background: rgba(255, 255, 255, 0.05);
+
+  .accordion-header {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 0.5em;
+    cursor: pointer;
+  }
+
+  .accordion-content {
+    padding: 0.5em;
+  }
+}

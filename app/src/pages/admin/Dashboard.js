@@ -26,7 +26,7 @@ const data = [
   { name: 'Page F', value: 500, uv: 1400, pv: 680, amt: 1700, cnt: 380, },
 ];
 
-const widthHelper = (document.querySelector('.main_content .content')?.width || (window.innerWidth - 275)) / 2;
+const widthHelper = (typeof window !== 'undefined' ? (document.querySelector('.main_content .content')?.width || ((window.innerWidth - 275) / 2)) : 0);
 
 const renderLineChart = (
   <LineChart width={widthHelper} height={widthHelper * 0.66} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>

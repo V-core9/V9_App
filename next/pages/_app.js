@@ -1,7 +1,18 @@
-import '../styles/globals.css'
+import { Provider } from 'react-redux';
+import { useRouter } from 'next/router';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import { store } from '../store';
+import { history } from '../helpers';
+
+import '../styles/globals.css';
+
+export default function MyApp({ Component, pageProps }) {
+
+  history.navigate = useRouter();
+
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  )
 }
-
-export default MyApp
