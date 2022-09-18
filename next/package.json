@@ -9,11 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "jsonwebtoken": "^8.5.1",
     "next": "12.3.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "uuidv4": "^6.2.13",
+    "v_rifier": "^0.2.4",
+    "v_to_sha256": "^1.1.0",
+    "x-powered-by-random": "^0.0.4",
+    "prisma": "^4.3.1"
   },
   "devDependencies": {
+    "@prisma/client": "^4.3.1",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0"
   }
