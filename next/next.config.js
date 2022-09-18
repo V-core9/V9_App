@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -9,6 +10,10 @@ const nextConfig = {
   //   }
   //   return config
   // }
-}
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

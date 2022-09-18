@@ -16,17 +16,20 @@ export default async function handler(req, res) {
 
   if (!email || !password) {
     res.status(400).json({ message: 'You must provide an email and a password.' });
+    return;
   }
 
   const existingUser = await findUserByEmail(email);
 
   if (!existingUser) {
     res.status(403).json({ message: 'Invalid login credentials.' });
+    return;
   }
 
   const validPassword = await bcrypt.compare(password, existingUser.password);
   if (!validPassword) {
     res.status(403).json({ message: 'Invalid login credentials.' });
+    return;
   }
 
   const jti = uuidv4();
@@ -34,4 +37,5 @@ export default async function handler(req, res) {
   await addRefreshTokenToWhitelist({ jti, refreshToken, userId: existingUser.id });
 
   res.status(200).json({ accessToken, refreshToken });
+  return;
 }
