@@ -1,7 +1,9 @@
-import db from '../utils/db';
+import type { AuthService, RefreshWhitelistTokenType } from '../';
+
+const { db } = require('../utils/db');
 const v_to_sha256 = require('v_to_sha256');
 
-const authService = {
+const authService: AuthService = {
 
   addRefreshTokenToWhitelist({ jti, refreshToken, userId }) {
     return db.refreshToken.create({

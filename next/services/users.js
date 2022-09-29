@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
-import db from '../utils/db';
+const { db } = require('../utils/db');
+// import db from '../utils/db';
 
 
 const usersService = {
@@ -46,4 +47,4 @@ const usersService = {
 };
 
 module.exports = usersService;
-export default usersService;
+module.exports.default = usersService;

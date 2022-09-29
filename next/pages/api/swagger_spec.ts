@@ -1,7 +1,5 @@
 import { withSwagger } from 'next-swagger-doc';
 
-import swaggerSpec from '../../swaggerSpec';
-
-const swaggerHandler = withSwagger(swaggerSpec);
+const swaggerHandler = withSwagger(require('../../swaggerSpec') || {});
 
 export default swaggerHandler();

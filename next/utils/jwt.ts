@@ -1,6 +1,7 @@
+import type { AuthJwtResponse, UserType } from '..';
 const jwt = require('jsonwebtoken');
 
-function generateAccessToken(user) {
+function generateAccessToken(user: UserType): string {
   return jwt.sign(
     {
       userId: user.id,
@@ -14,7 +15,7 @@ function generateAccessToken(user) {
   );
 }
 
-function generateRefreshToken(user, jti) {
+function generateRefreshToken(user: UserType, jti: any): string {
   return jwt.sign(
     {
       userId: user.id,
@@ -29,7 +30,7 @@ function generateRefreshToken(user, jti) {
   );
 }
 
-function generateTokens(user, jti) {
+function generateTokens(user: UserType, jti: any): AuthJwtResponse {
   const accessToken = generateAccessToken(user);
   const refreshToken = generateRefreshToken(user, jti);
 
@@ -39,7 +40,7 @@ function generateTokens(user, jti) {
   };
 }
 
-const jwtFunctions = {
+const jwtFunctions: any = {
   generateAccessToken,
   generateRefreshToken,
   generateTokens,

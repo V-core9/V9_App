@@ -7,9 +7,15 @@
     "Development",
     "Next.js"
   ],
-  "author": "v-core9",
+  "main": "",
+  "author": {
+    "name": "V-core9",
+    "url": "https://github.com/v-core9",
+    "email": "slavko.vuletic92@gmail.com"
+  },
   "license": "MIT",
   "private": true,
+  "types": "index.d.ts",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -16,7 +16,7 @@ export * from './books.slice';
 export * from './myBooks.slice';
 export * from './appFunctions.slice';
 
-export const store = configureStore({
+export const store: any = configureStore({
   reducer: {
     application,
     auth,
@@ -28,3 +28,8 @@ export const store = configureStore({
     nasaAssets: nasaAssetsReducer
   },
 });
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
