@@ -1,9 +1,10 @@
 #!/bin/bash
 
-docker stop v_api
-docker stop v_app
+# docker stop v_api
+# docker stop v_app
+# docker stop v_phpmyadmin
+
 docker stop v_next
-docker stop v_phpmyadmin
 docker stop v_mysql
 docker stop v_nginx
 
@@ -11,4 +12,4 @@ echo 'y' | docker system prune
 
 sh run dev
 
-docker exec -it v_api sh -c 'npm run prisma:deploy'
+docker exec -it v_next sh -c 'npm run prisma:deploy'

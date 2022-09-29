@@ -1,9 +1,13 @@
+
 const { db } = require('../utils/db');
 
-function createFuncTest(data) {
-  return db.functionTest.create({ data });
-}
+const functionTestService = {
 
-module.exports = {
-  createFuncTest
+  createFuncTest(data) {
+    return db.functionTest.create({ data });
+  }
+
 };
+
+module.exports = functionTestService;
+module.exports.default = functionTestService;

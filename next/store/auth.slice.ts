@@ -5,11 +5,19 @@ import { toast } from 'react-toastify';
 
 import { history, fetchWrapper } from '../helpers';
 
+import type { NewUserRegisterForm, UserLoginType } from '../index';
+
 // create slice
 const name = 'auth';
 
-const initialState = {
-  user: (typeof window !== 'undefined' ? (JSON.parse(localStorage.getItem('user')) || null) : null),
+interface Auth {
+  user: Object | null,
+  loading: Boolean | null,
+  error: Object | null,
+}
+
+const initialState: Auth = {
+  user: (typeof window !== 'undefined' ? (JSON.parse(localStorage.getItem('user') as any) || null) : null),
   loading: null,
   error: null
 };
@@ -49,12 +57,12 @@ const slice = createSlice({
         state.user = user;
 
         // get return url from location state or default to home page
-        if (typeof window !== 'undefined') history.navigate.push('/');
+        if (typeof window !== 'undefined')<Object>history.navigate?.push('/');
         toast("Login Successful!", { type: "success" });
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.error;
-        toast(state.error.message, { type: "error" });
+        toast(state.error?.message, { type: "error" });
       });
 
     // Register
@@ -65,12 +73,12 @@ const slice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         // get return url from location state or default to home page
         const { from } = router.pathname || { from: { pathname: '/login' } };
-        if (typeof window !== 'undefined') history.navigate.push(from);
+        if (typeof window !== 'undefined') history.navigate?.push(from);
         toast("Register Successful!", { type: "success" });
       })
       .addCase(register.rejected, (state, action) => {
         state.error = action.error;
-        toast(state.error.message, { type: "error" });
+        toast(state.error?.message, { type: "error" });
       });
 
     // Refresh Auth Tokens
@@ -98,17 +106,17 @@ const slice = createSlice({
 
 const login = createAsyncThunk(
   `${name}/login`,
-  async ({ email, password }) => await fetchWrapper.post(`http://localhost/api/auth/login`, { email, password })
+  async ({ email, password }: UserLoginType) => await fetchWrapper.post(`http://localhost/api/auth/login`, { email, password })
 );
 
 const register = createAsyncThunk(
   `${name}/register`,
-  async ({ username, email, password }) => await fetchWrapper.post(`http://localhost/api/auth/register`, { username, email, password })
+  async ({ username, email, password }: NewUserRegisterForm) => await fetchWrapper.post(`http://localhost/api/auth/register`, { username, email, password })
 );
 
 const refreshToken = createAsyncThunk(
   `${name}/refreshToken`,
-  async ({ refreshToken }) => await fetchWrapper.post(`http://localhost/api/auth/refreshToken`, { refreshToken })
+  async ({ refreshToken }: { refreshToken: string }) => await fetchWrapper.post(`http://localhost/api/auth/refreshToken`, { refreshToken })
 );
 
 

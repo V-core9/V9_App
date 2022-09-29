@@ -2,7 +2,7 @@ import { isDev } from '../helpers';
 import { DemoAdminAccountAlert, FormLogin } from '../components';
 
 
-export default function Login(props = {}) {
+export default function Login(props = {}): JSX.Element {
   return (
     <div className="public-login-page">
       <FormLogin />
