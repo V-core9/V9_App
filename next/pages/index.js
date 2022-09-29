@@ -13,6 +13,7 @@ export default function Home(props = {}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+
       <ul>
         <li>
           <Link href="/">
@@ -25,8 +26,13 @@ export default function Home(props = {}) {
           </Link>
         </li>
         <li>
-          <Link href="/blog/hello-world">
-            <a>Blog Post</a>
+          <Link href="/home">
+            <a>New Home</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/login">
+            <a>Login</a>
           </Link>
         </li>
       </ul>
