@@ -5,8 +5,7 @@ const swaggerDefinition = {
   info: {
     title: 'V-core9.com Express API',
     version: '1.0.0',
-    description:
-      'This is a REST API application made with Express. It retrieves data from nowhere for now.',
+    description: 'This is a REST API application made with Express.',
     license: {
       name: 'Licensed Under MIT',
       url: 'https://spdx.org/licenses/MIT.html',
@@ -18,7 +17,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: `http://localhost/api/`,
+      url: 'http://localhost/api/',
       description: 'Development server',
     },
   ],
