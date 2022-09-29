@@ -1,12 +1,16 @@
 const router = require('express').Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  const rootApiPage = {
-    title: 'Express',
-    apiMode: process.env.NODE_ENV || 'production',
-  };
-  res.render('index', rootApiPage);
+router.get('/', async (req, res, next) => {
+  try {
+    res.json({
+      title: 'Express API Title',
+      mode: process.env.NODE_ENV || 'production',
+      timestamp: new Date(),
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

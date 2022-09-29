@@ -2,6 +2,7 @@
 
 docker stop v_api
 docker stop v_app
+docker stop v_next
 docker stop v_phpmyadmin
 docker stop v_mysql
 docker stop v_nginx
