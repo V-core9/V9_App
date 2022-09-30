@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { history } from '../helpers';
 import { authActions } from '../store';
-import type { NewUserRegisterForm } from '../index';
+import type { NewUser } from '..';
 
 export default function Register(props = {}): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,7 +38,7 @@ export default function Register(props = {}): JSX.Element {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors, isSubmitting } = formState;
 
-  const onSubmit: any = ({ username, email, password }: NewUserRegisterForm) => {
+  const onSubmit: any = ({ username, email, password }: NewUser) => {
     return dispatch(authActions.register({ username, email, password }));
   }
 

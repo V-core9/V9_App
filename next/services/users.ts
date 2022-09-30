@@ -1,15 +1,15 @@
+// Types and Interfaces
+import type { UserService } from '..';
+
+// Loading of things
 const bcrypt = require('bcrypt');
 const { db } = require('../utils/db');
-// import db from '../utils/db';
 
+const usersService: UserService = {
 
-const usersService = {
+  listUsers: () => db.user.findMany(),
 
-  listUsers() {
-    return db.user.findMany();
-  },
-
-  findUserByEmail(email) {
+  findUserByEmail: (email) => {
     return db.user.findUnique({
       where: {
         email,
@@ -17,7 +17,7 @@ const usersService = {
     });
   },
 
-  findUserById(id) {
+  findUserById: (id) => {
     return db.user.findUnique({
       where: {
         id,
@@ -25,8 +25,8 @@ const usersService = {
     });
   },
 
-  updateUser(data) {
-    if (data.password !== undefined) delete data.password;
+  updateUser: (data) => {
+    //if (data.password !== undefined) delete data.password;
     return db.user.update({
       where: {
         id: data.id,
@@ -38,13 +38,15 @@ const usersService = {
     });
   },
 
-  createUserByEmailAndPassword(user) {
+  createUserByEmailAndPassword: (user) => {
     user.password = bcrypt.hashSync(user.password, 12);
     return db.user.create({
       data: user,
     });
   }
+
 };
+
 
 module.exports = usersService;
 module.exports.default = usersService;

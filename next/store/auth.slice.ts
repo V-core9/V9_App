@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import { history, fetchWrapper } from '../helpers';
 
-import type { NewUserRegisterForm, UserLoginType } from '../index';
+import type { NewUser, UserLoginType } from '../index';
 
 // create slice
 const name = 'auth';
@@ -111,7 +111,7 @@ const login = createAsyncThunk(
 
 const register = createAsyncThunk(
   `${name}/register`,
-  async ({ username, email, password }: NewUserRegisterForm) => await fetchWrapper.post(`http://localhost/api/auth/register`, { username, email, password })
+  async ({ username, email, password }: NewUser) => await fetchWrapper.post(`http://localhost/api/auth/register`, { username, email, password })
 );
 
 const refreshToken = createAsyncThunk(

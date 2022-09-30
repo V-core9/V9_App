@@ -1,7 +1,10 @@
-import type { AuthService, RefreshWhitelistTokenType } from '../';
+// Types and Interfaces
+import type { AuthService } from '..';
 
+// Loading of things
 const { db } = require('../utils/db');
 const v_to_sha256 = require('v_to_sha256');
+
 
 const authService: AuthService = {
 

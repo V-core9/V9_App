@@ -15,21 +15,36 @@ const { generateTokens } = require('../../../utils/jwt');
  * @swagger
  * /api/auth/login:
  *   post:
- *     description: Attempts to login a user with provided data.
+ *     summary: Login user using auth.
+ *     requestBody:
+ *       description: Optional description in *Markdown*
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Login'
+ *     description: Provides fresh Access and Refresh Tokens for user to use.
+ *     tags: [Auth]
  *     responses:
  *       200:
- *         description: Login Successful.
- */
+ *         description: User Login.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               $ref: '#/components/schemas/NewAuth'
+*/
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<AuthJwtResponse>) {
 
+  //! Must be a [POST] Method
   if (req.method !== 'POST') {
     res.status(403).json(<any>{ message: 'Invalid API method' });
     return;
   }
 
-  const { email, password } = req.body;
+  const { email, password } = <UserLoginType>req.body;
 
   if (!email || !password) {
     res.status(400).json(<any>{ message: 'You must provide an email and a password.' });
