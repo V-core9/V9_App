@@ -16,7 +16,7 @@ export default function Register(props = {}): JSX.Element {
   //const authUser = useSelector(x => x.auth.user);
   //const authError = useSelector(x => x.auth.error);
 
-  const { user: authUser, error: authError } = useSelector(x => x.auth);
+  const { user: authUser, error: authError } = useSelector((x: any) => x.auth);
 
   useEffect(() => {
     // redirect to home if already logged in
@@ -45,21 +45,21 @@ export default function Register(props = {}): JSX.Element {
   return (
     <form className='public-register' onSubmit={handleSubmit(onSubmit)}>
       <header>Register</header>
-      <form_group>
+      <div>
         <label>Username</label>
-        <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+        <input type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
         <div className="invalid-feedback">{errors.username?.message as string}</div>
-      </form_group>
-      <form_group>
+      </div>
+      <div>
         <label>Email</label>
-        <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+        <input type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
         <div className="invalid-feedback">{errors.email?.message as string}</div>
-      </form_group>
-      <form_group>
+      </div>
+      <div>
         <label>Password</label>
-        <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
+        <input type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
         <div className="invalid-feedback">{errors.password?.message as string}</div>
-      </form_group>
+      </div>
       <button disabled={isSubmitting} className="success">
         {isSubmitting && <span>LOADING...</span>}
         Register

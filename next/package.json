@@ -24,7 +24,7 @@
     "lint": "next lint",
     "prisma:deploy": "sh -c \" npm run prisma:reset ; npm run prisma:migrate ; npm run prisma:seed \"",
     "prisma:migrate": "npx prisma migrate dev ",
-    "prisma:seed": "node prisma/seed.js",
+    "prisma:seed": "npx ts-node prisma/seed.js",
     "prisma:reset": "echo \"y\"|npx prisma migrate reset"
   },
   "dependencies": {
@@ -50,6 +50,7 @@
     "recharts": "^2.1.13",
     "sass": "^1.54.9",
     "swagger-ui-react": "^4.14.1",
+    "ts-node": "10.9.1",
     "uuidv4": "^6.2.13",
     "v_is_empty_value": "^1.1.0",
     "v_rifier": "^0.2.4",
@@ -62,6 +63,7 @@
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@types/swagger-ui-react": "^4.11.0",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
     "typescript": "4.8.4"

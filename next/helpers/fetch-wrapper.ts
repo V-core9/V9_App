@@ -49,8 +49,8 @@ async function authHeader(url: string): Promise<Object> {
 
 
 function handleResponse(response: any): Object {
-  return response.text().then(text => {
-    const data = text && JSON.parse(text);
+  return response.text().then((text: unknown) => {
+    const data = text && JSON.parse(<string>text);
     if (!response.ok) {
       if ([401, 403, 500].includes(response.status) && authToken()) {
         if (data.message !== 'TokenExpiredError' || data.message === 'jwt expired') {

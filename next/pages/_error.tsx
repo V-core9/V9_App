@@ -1,6 +1,6 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Error from 'next/error';
+import type { ErrorProps } from 'next/error';
 
 function ErrorPage({ statusCode }: { statusCode: number | unknown }) {
   return (
@@ -12,7 +12,7 @@ function ErrorPage({ statusCode }: { statusCode: number | unknown }) {
   )
 }
 
-ErrorPage.getInitialProps = ({ res, err }: { res: NextApiResponse, err: Error }) => {
+ErrorPage.getInitialProps = ({ res, err }: { res: NextApiResponse, err: Partial<ErrorProps> }) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
   return { statusCode }
 }

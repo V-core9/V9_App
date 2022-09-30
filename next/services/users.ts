@@ -49,4 +49,4 @@ const usersService: UserService = {
 
 
 module.exports = usersService;
-module.exports.default = usersService;
+//export default usersService;

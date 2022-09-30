@@ -4,3 +4,4 @@ const db = new PrismaClient();
 
 module.exports = { db };
 module.exports.default = { db };
+//export default db;

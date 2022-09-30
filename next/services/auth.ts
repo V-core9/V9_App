@@ -51,5 +51,4 @@ const authService: AuthService = {
 };
 
 module.exports = authService;
-
-export default authService;
+//export default authService;

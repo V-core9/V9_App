@@ -13,7 +13,7 @@ const name = 'auth';
 interface Auth {
   user: Object | null,
   loading: Boolean | null,
-  error: Object | null,
+  error?: any,
 }
 
 const initialState: Auth = {
@@ -71,9 +71,7 @@ const slice = createSlice({
         state.error = null;
       })
       .addCase(register.fulfilled, (state, action) => {
-        // get return url from location state or default to home page
-        const { from } = router.pathname || { from: { pathname: '/login' } };
-        if (typeof window !== 'undefined') history.navigate?.push(from);
+        if (typeof window !== 'undefined') history.navigate?.push('/login');
         toast("Register Successful!", { type: "success" });
       })
       .addCase(register.rejected, (state, action) => {
