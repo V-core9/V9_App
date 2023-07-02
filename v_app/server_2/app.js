@@ -13,7 +13,7 @@ const debug = require('debug')('api:server');
 //! Socket.io
 const http = require('http');
 const { Server } = require('socket.io');
-const createWsEventsHandlers = require('./socket/createWsEventsHandlers');
+const { createWsEventsHandlers } = require('./socket/createWsEventsHandlers');
 //! io eof
 
 const { notFound, errorHandler } = require('./middlewares');
@@ -74,6 +74,7 @@ const io = new Server(server, {
 // Listen for when the client connects via socket.io-client
 io.on('connection', (socket) => {
   console.log(`User connected ${socket.id}`);
+  // eslint-disable-next-line max-len
   createWsEventsHandlers(io, socket).forEach((item) => socket.on(item.eventName, item.method));
 });
 //! io eof
@@ -86,11 +87,13 @@ app.use('/bookmarks', bookmarksRouter);
 app.use('/functions', functionsRouter);
 app.use('/developers', developersRouter);
 
-/*if (process.env.NODE_ENV === 'development') {
+/*
+if (process.env.NODE_ENV === 'development') {
   const swaggerUi = require('swagger-ui-express');
   const swaggerSpec = require('./swaggerSpec');
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-}*/
+}
+*/
 
 app.use(notFound);
 app.use(errorHandler);
@@ -118,7 +121,6 @@ server.on('listening', onListening);
 //   res.status(err.status || 500);
 //   res.render('error');
 // });
-
 
 function onError(error) {
   if (error.syscall !== 'listen') {

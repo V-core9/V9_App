@@ -39,14 +39,11 @@ const Messages = ({ socket }) => {
 
   // Scroll to the most recent message
   useEffect(() => {
-    messagesColumnRef.current.scrollTop =
-      messagesColumnRef.current.scrollHeight;
+    messagesColumnRef.current.scrollTop = messagesColumnRef.current.scrollHeight;
   }, [messagesRecieved]);
 
   function sortMessagesByDate(messages) {
-    return messages.sort(
-      (a, b) => parseInt(a.created_at) - parseInt(b.created_at)
-    );
+    return messages.sort((a, b) => parseInt(a.created_at) - parseInt(b.created_at));
   }
 
   // dd/mm/yyyy, hh:mm:ss
@@ -56,14 +53,18 @@ const Messages = ({ socket }) => {
   }
 
   return (
-    <div className={styles.messagesColumn} ref={messagesColumnRef}>
+    <div
+      className={styles.messagesColumn}
+      ref={messagesColumnRef}
+    >
       {messagesRecieved.map((msg, i) => (
-        <div className={styles.message} key={i}>
+        <div
+          className={styles.message}
+          key={i}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <span className={styles.msgMeta}>{msg.username}</span>
-            <span className={styles.msgMeta}>
-              {formatDateFromTimestamp(msg.created_at)}
-            </span>
+            <span className={styles.msgMeta}>{formatDateFromTimestamp(msg.created_at)}</span>
           </div>
           <p className={styles.msgText}>{msg.message}</p>
           <br />

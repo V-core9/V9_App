@@ -1,57 +1,38 @@
-const leaveRoom = require('./utils/leave-room');
+const send_message = require('./handlers/send_message');
+const join_room = require('./handlers/join_room');
+const leave_room = require('./handlers/leave_room');
+const disconnect = require('./handlers/disconnect');
 
 const CHAT_BOT = 'ChatBot';
 let chatRoom = ''; // E.g. javascript, node,...
+function setChatRoom(room) {
+  chatRoom = room;
+}
 let allUsers = []; // All users in current chat room
-
-const leave_room = (io, socket) => (data) => {
-  const { username, room } = data;
-  socket.leave(room);
-  const created_at = Date.now();
-  // Remove user from memory
-  allUsers = leaveRoom(socket.id, allUsers);
-  socket.to(room).emit('chatroom_users', allUsers);
-  socket.to(room).emit('receive_message', {
-    username: CHAT_BOT,
-    message: `${username} has left the chat`,
-    created_at,
-  });
-  console.log(`${username} has left the chat`);
-};
-
-const disconnect = (io, socket) => () => {
-  console.log('User disconnected from the chat');
-  const user = allUsers.find((user) => user.id == socket.id);
-  if (user?.username) {
-    allUsers = leaveRoom(socket.id, allUsers);
-    socket.to(chatRoom).emit('chatroom_users', allUsers);
-    socket.to(chatRoom).emit('receive_message', {
-      message: `${user.username} has disconnected from the chat.`,
-    });
-  }
-};
+function setAllUsers(users) {
+  allUsers = [...users];
+}
 
 const createWsEventsHandlers = (io, socket) => [
   {
     eventName: 'send_message',
-    method: require('./handlers/send_message')(io, socket),
+    method: send_message(io, socket, setChatRoom, setAllUsers, chatRoom, allUsers),
   },
   {
     eventName: 'join_room',
-    method: require('./handlers/join_room')(io, socket),
+    method: join_room(io, socket, setChatRoom, setAllUsers, chatRoom, allUsers),
   },
   {
     eventName: 'leave_room',
-    method: leave_room(io, socket),
+    method: leave_room(io, socket, setChatRoom, setAllUsers, chatRoom, allUsers),
   },
   {
     eventName: 'disconnect',
-    method: disconnect(io, socket),
+    method: disconnect(io, socket, setChatRoom, setAllUsers, chatRoom, allUsers),
   },
 ];
 
-module.exports = createWsEventsHandlers;
-
+module.exports = {
+  createWsEventsHandlers,
+};
 module.exports.CHAT_BOT = CHAT_BOT;
-module.exports.chatRoom = chatRoom;
-module.exports.allUsers = allUsers;

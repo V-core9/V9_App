@@ -1,8 +1,6 @@
-const createWsEventsHandlers = require('../createWsEventsHandlers');
+const { CHAT_BOT } = require('../createWsEventsHandlers');
 
-let { CHAT_BOT, chatRoom, allUsers } = createWsEventsHandlers;
-
-const join_room = (io, socket) => (data) => {
+const join_room = (io, socket, setChatRoom, setAllUsers, chatRoom, allUsers) => (data) => {
   const { username, room } = data; // Data sent from client when join_room event emitted
   socket.join(room); // Join the user to a socket room
 
@@ -20,9 +18,10 @@ const join_room = (io, socket) => (data) => {
     created_at,
   });
   // Save the new user to the room
-  chatRoom = room;
-  allUsers.push({ id: socket.id, username, room });
-  let chatRoomUsers = allUsers.filter((user) => user.room === room);
+  setChatRoom(room);
+  const newAllUsers = [...allUsers, { id: socket.id, username, room }];
+  setAllUsers(newAllUsers);
+  const chatRoomUsers = newAllUsers.filter((user) => user.room === room);
   socket.to(room).emit('chatroom_users', chatRoomUsers);
   socket.emit('chatroom_users', chatRoomUsers);
 
