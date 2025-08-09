@@ -1,7 +1,7 @@
-function notFound(req, res, next) {
-  res.status(404);
-  const error = new Error(`🔍 - Not Found - ${req.originalUrl}`);
-  next(error);
+const createError = require('http-errors')
+
+const notFound = async (req, res, next) => {
+  next(createError(404))
 }
 
-module.exports = notFound;
+module.exports = notFound
