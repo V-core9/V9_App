@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Editor from "@monaco-editor/react";
 
+import apiLocation from '../../config/apiLocation'
 import { fetchWrapper } from '../../helpers';
 import { appFunctionsActions } from '../../store';
 
@@ -27,7 +28,7 @@ function AppFunctionsEditForm() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    fetchWrapper.get(`http://localhost/api/functions/${func_id}`).then(val => {
+    fetchWrapper.get(`${apiLocation}/functions/${func_id}`).then(val => {
       setName(val?.name);
       setDescription(val?.description);
       setContent(val?.content);

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { fetchWrapper } from '../helpers';
+import apiLocation from '../config/apiLocation'
 
 const initialState = {
   appFunctions: [],
@@ -11,22 +12,22 @@ const initialState = {
 
 export const getAll = createAsyncThunk(
   'appFunctions/all',
-  async () => await fetchWrapper.get(`http://localhost/api/functions`)
+  async () => await fetchWrapper.get(`${apiLocation}/functions`)
 );
 
 export const createNew = createAsyncThunk(
   'appFunctions/new',
-  async (func) => await fetchWrapper.post(`http://localhost/api/functions`, { ...func })
+  async (func) => await fetchWrapper.post(`${apiLocation}/functions`, { ...func })
 );
 
 export const deleteFunction = createAsyncThunk(
   'appFunctions/delete',
-  async (id) => await fetchWrapper.delete(`http://localhost/api/functions`, { id })
+  async (id) => await fetchWrapper.delete(`${apiLocation}/functions`, { id })
 );
 
 export const updateFunction = createAsyncThunk(
   'appFunctions/update',
-  async (func) => await fetchWrapper.put(`http://localhost/api/functions`, { ...func })
+  async (func) => await fetchWrapper.put(`${apiLocation}/functions`, { ...func })
 );
 
 export const appFunctionsSlice = createSlice({

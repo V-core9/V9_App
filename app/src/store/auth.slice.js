@@ -1,117 +1,117 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import jwt_decode from "jwt-decode";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import jwt_decode from 'jwt-decode'
 
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
-import { history, fetchWrapper } from '../helpers';
+import { history, fetchWrapper } from '../helpers'
+import apiLocation from '../config/apiLocation'
 
 // create slice
-const name = 'auth';
+const name = 'auth'
 
 const initialState = {
   user: JSON.parse(localStorage.getItem('user')),
   loading: null,
   error: null
-};
+}
 
 const slice = createSlice({
   name,
   initialState,
   reducers: {
     logout(state) {
-      state.user = null;
-      localStorage.removeItem('user');
-      toast("User Logged Out!", { type: "info" });
+      state.user = null
+      localStorage.removeItem('user')
+      toast('User Logged Out!', { type: 'info' })
       //window.location.reload();
-    },
+    }
   },
   extraReducers(builder) {
     // Login
     builder
       .addCase(login.pending, (state) => {
-        state.error = null;
+        state.error = null
         // toast("Login Attempted", { type: "info" });
       })
       .addCase(login.fulfilled, (state, action) => {
-        let user = action.payload;
+        let user = action.payload
 
-        const { accessToken, refreshToken } = user;
+        const { accessToken, refreshToken } = user
 
-        user = jwt_decode(refreshToken);
-        user.accessToken = jwt_decode(accessToken);
-        user.accessToken.token = accessToken;
-        user.refreshToken = jwt_decode(refreshToken);
-        user.refreshToken.token = refreshToken;
+        user = jwt_decode(refreshToken)
+        user.accessToken = jwt_decode(accessToken)
+        user.accessToken.token = accessToken
+        user.refreshToken = jwt_decode(refreshToken)
+        user.refreshToken.token = refreshToken
 
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user));
-        state.user = user;
+        localStorage.setItem('user', JSON.stringify(user))
+        state.user = user
 
         // get return url from location state or default to home page
-        history.navigate('/');
-        toast("Login Successful!", { type: "success" });
+        history.navigate('/')
+        toast('Login Successful!', { type: 'success' })
       })
       .addCase(login.rejected, (state, action) => {
-        state.error = action.error;
-        toast(state.error.message, { type: "error" });
-      });
+        state.error = action.error
+        toast(state.error.message, { type: 'error' })
+      })
 
     // Register
     builder
       .addCase(register.pending, (state) => {
-        state.error = null;
+        state.error = null
       })
       .addCase(register.fulfilled, (state, action) => {
         // get return url from location state or default to home page
-        const { from } = history.location.state || { from: { pathname: '/login' } };
-        history.navigate(from);
-        toast("Register Successful!", { type: "success" });
+        const { from } = history.location.state || { from: { pathname: '/login' } }
+        history.navigate(from)
+        toast('Register Successful!', { type: 'success' })
       })
       .addCase(register.rejected, (state, action) => {
-        state.error = action.error;
-        toast(state.error.message, { type: "error" });
-      });
+        state.error = action.error
+        toast(state.error.message, { type: 'error' })
+      })
 
     // Refresh Auth Tokens
     builder
       .addCase(refreshToken.fulfilled, (state, action) => {
-        let user = action.payload;
+        let user = action.payload
 
-        const { accessToken, refreshToken } = user;
+        const { accessToken, refreshToken } = user
 
-        user = jwt_decode(refreshToken);
-        user.accessToken = jwt_decode(accessToken);
-        user.accessToken.token = accessToken;
-        user.refreshToken = jwt_decode(refreshToken);
-        user.refreshToken.token = refreshToken;
+        user = jwt_decode(refreshToken)
+        user.accessToken = jwt_decode(accessToken)
+        user.accessToken.token = accessToken
+        user.refreshToken = jwt_decode(refreshToken)
+        user.refreshToken.token = refreshToken
 
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user));
-        state.user = user;
+        localStorage.setItem('user', JSON.stringify(user))
+        state.user = user
       })
       .addCase(refreshToken.rejected, (state, action) => {
-        state.error = action.error;
-      });
+        state.error = action.error
+      })
   }
-});
+})
 
 const login = createAsyncThunk(
   `${name}/login`,
-  async ({ email, password }) => await fetchWrapper.post(`http://localhost/api/auth/login`, { email, password })
-);
+  async ({ email, password }) => await fetchWrapper.post(`${apiLocation}/auth/login`, { email, password })
+)
 
 const register = createAsyncThunk(
   `${name}/register`,
-  async ({ username, email, password }) => await fetchWrapper.post(`http://localhost/api/auth/register`, { username, email, password })
-);
+  async ({ username, email, password }) =>
+    await fetchWrapper.post(`${apiLocation}/auth/register`, { username, email, password })
+)
 
 const refreshToken = createAsyncThunk(
   `${name}/refreshToken`,
-  async ({ refreshToken }) => await fetchWrapper.post(`http://localhost/api/auth/refreshToken`, { refreshToken })
-);
-
-
+  async ({ refreshToken }) => await fetchWrapper.post(`${apiLocation}/auth/refreshToken`, { refreshToken })
+)
 
 // ACTUAL EXPORTS
-export const authActions = { ...slice.actions, login, register, refreshToken };
-export default slice.reducer;
+export const authActions = { ...slice.actions, login, register, refreshToken }
+export default slice.reducer

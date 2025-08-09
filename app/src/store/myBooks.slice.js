@@ -2,29 +2,30 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { toast } from 'react-toastify';
 import { fetchWrapper } from '../helpers';
+import apiLocation from '../config/apiLocation'
 
 
 export const getMyBooks = createAsyncThunk(
   `myBooks/getMyBooks`,
-  async () => await fetchWrapper.get(`http://localhost/api/books/me`)
+  async () => await fetchWrapper.get(`${apiLocation}/books/me`)
 );
 
 
 export const newBook = createAsyncThunk(
   `myBooks/newBook`,
-  async ({ title, description, content }) => await fetchWrapper.post(`http://localhost/api/books/`, { title, description, content })
+  async ({ title, description, content }) => await fetchWrapper.post(`${apiLocation}/books/`, { title, description, content })
 );
 
 
 export const deleteBook = createAsyncThunk(
   `myBooks/deleteBook`,
-  async (id) => await fetchWrapper.delete(`http://localhost/api/books/`, { id })
+  async (id) => await fetchWrapper.delete(`${apiLocation}/books/`, { id })
 );
 
 
 export const updateBook = createAsyncThunk(
   `myBooks/updateBook`,
-  async ({ id, title, description, content }) => await fetchWrapper.put(`http://localhost/api/books/${id}`, { title, description, content })
+  async ({ id, title, description, content }) => await fetchWrapper.put(`${apiLocation}/books/${id}`, { title, description, content })
 );
 
 

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { fetchWrapper } from '../helpers';
+import apiLocation from '../config/apiLocation'
 
 // create slice
 
@@ -37,7 +38,7 @@ const slice = createSlice({
 
 export const getAll = createAsyncThunk(
   `${name}/getAll`,
-  async () => await fetchWrapper.get(`http://localhost/api/users`)
+  async () => await fetchWrapper.get(`${apiLocation}/users`)
 );
 
 
