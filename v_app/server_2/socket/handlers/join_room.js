@@ -19,7 +19,7 @@ const join_room = (io, socket, setChatRoom, setAllUsers, chatRoom, allUsers) => 
   });
   // Save the new user to the room
   setChatRoom(room);
-  const newAllUsers = [...allUsers, { id: socket.id, username, room }];
+  const newAllUsers = [...allUsers?.filter((user) => user.username !== username), { id: socket.id, username, room }];
   setAllUsers(newAllUsers);
   const chatRoomUsers = newAllUsers.filter((user) => user.room === room);
   socket.to(room).emit('chatroom_users', chatRoomUsers);
