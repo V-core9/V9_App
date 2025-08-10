@@ -26,3 +26,8 @@ else
 fi
 
 docker-compose up -d
+
+# TODO: Better waiting for MySQL container 
+sleep 30
+# Database deployment 
+docker exec -it v_api sh -c 'npm run prisma:deploy'
